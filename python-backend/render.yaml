@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: athlynx-api
+    runtime: python
+    region: oregon
+    plan: free
+    branch: main
+    rootDir: .
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+      - key: DATABASE_URL
+        value: postgresql://neondb_owner:npg_cg8yIJjisUX6@ep-misty-glade-aeu51x06.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require
+      - key: ENVIRONMENT
+        value: production
+      - key: AWS_REGION
+        value: us-east-2

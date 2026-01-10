@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "main.py"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "postgresql://neondb_owner:npg_cg8yIJjisUX6@ep-bold-bar-a3gw1i6x-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require",
+    "RESEND_API_KEY": "re_YwrFNHMa_5LWwNJxBbJoX6gEqpLZRMCxU"
+  }
+}
