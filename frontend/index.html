@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦁 ATHLYNX - The World's First Triple-Channel Verification Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            font-size: 48px;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .logo p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .channel-selector {
+            margin-bottom: 30px;
+        }
+
+        .channel-selector h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .channel-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .channel-option {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .channel-option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .channel-option.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .channel-option .icon {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+
+        .channel-option .label {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .verification-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .verification-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .code-input {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .code-digit {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+        }
+
+        .code-digit:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        .whatsapp-notice {
+            display: none;
+            background: #25D366;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .whatsapp-notice.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>🦁 ATHLYNX</h1>
+            <p>The Athlete's Playbook</p>
+        </div>
+
+        <div class="badges">
+            <span class="badge">LIVE</span>
+            <span class="badge">HIPAA COMPLIANT</span>
+            <span class="badge">3 CHANNELS</span>
+        </div>
+
+        <form id="signupForm">
+            <div class="channel-selector">
+                <h3>Choose Your Verification Method:</h3>
+                <div class="channel-options">
+                    <div class="channel-option" data-channel="email">
+                        <div class="icon">📧</div>
+                        <div class="label">Email</div>
+                    </div>
+                    <div class="channel-option selected" data-channel="sms">
+                        <div class="icon">📱</div>
+                        <div class="label">SMS</div>
+                    </div>
+                    <div class="channel-option" data-channel="whatsapp">
+                        <div class="icon">💬</div>
+                        <div class="label">WhatsApp</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="whatsapp-notice" id="whatsappNotice">
+                <strong>📱 WhatsApp Verification</strong><br>
+                You'll receive a code on WhatsApp. You can reply directly with the code or enter it here!
+            </div>
+
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" required placeholder="John Doe">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required placeholder="john@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" required placeholder="+1 234 567 8900">
+            </div>
+
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role" required>
+                    <option value="">Select Role</option>
+                    <option value="Athlete">Athlete</option>
+                    <option value="Parent">Parent</option>
+                    <option value="Coach">Coach</option>
+                    <option value="Brand">Brand</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="sport">Sport</label>
+                <select id="sport" required>
+                    <option value="">Select Sport</option>
+                    <option value="Baseball">Baseball</option>
+                    <option value="Football">Football</option>
+                    <option value="Basketball">Basketball</option>
+                    <option value="Soccer">Soccer</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                CLAIM MY VIP SPOT
+            </button>
+        </form>
+
+        <div class="footer">
+            Dreams Do Come True 2026! 🦁<br>
+            © 2026 ATHLYNX. All rights reserved.
+        </div>
+    </div>
+
+    <!-- Verification Modal -->
+    <div class="verification-modal" id="verificationModal">
+        <div class="modal-content">
+            <div id="verificationStep">
+                <h2>Enter Verification Code</h2>
+                <p style="color: #666; margin-bottom: 20px;">
+                    We sent a code to <span id="sentTo"></span>
+                </p>
+                <div class="code-input">
+                    <input type="text" maxlength="1" class="code-digit" data-index="0">
+                    <input type="text" maxlength="1" class="code-digit" data-index="1">
+                    <input type="text" maxlength="1" class="code-digit" data-index="2">
+                    <input type="text" maxlength="1" class="code-digit" data-index="3">
+                    <input type="text" maxlength="1" class="code-digit" data-index="4">
+                    <input type="text" maxlength="1" class="code-digit" data-index="5">
+                </div>
+                <button class="submit-btn" id="verifyBtn">Verify</button>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">🎉</div>
+                <h2>Welcome to ATHLYNX!</h2>
+                <p style="color: #666; margin: 20px 0;">
+                    Your account has been verified successfully!
+                </p>
+                <button class="submit-btn" onclick="location.reload()">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://web-production-42854.up.railway.app';
+        let selectedChannel = 'sms';
+        let userEmail = '';
+
+        // Channel selection
+        document.querySelectorAll('.channel-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.channel-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+                selectedChannel = this.dataset.channel;
+
+                // Show WhatsApp notice if WhatsApp is selected
+                const whatsappNotice = document.getElementById('whatsappNotice');
+                if (selectedChannel === 'whatsapp') {
+                    whatsappNotice.classList.add('active');
+                } else {
+                    whatsappNotice.classList.remove('active');
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('signupForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'SENDING...';
+
+            const formData = {
+                full_name: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                role: document.getElementById('role').value,
+                sport: document.getElementById('sport').value,
+                verification_channel: selectedChannel,
+                whatsapp_opt_in: selectedChannel === 'whatsapp'
+            };
+
+            userEmail = formData.email;
+
+            try {
+                const response = await fetch(`${API_URL}/api/signup`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Show verification modal
+                    const sentToText = selectedChannel === 'email' ? formData.email : 
+                                     selectedChannel === 'sms' ? formData.phone :
+                                     `WhatsApp (${formData.phone})`;
+                    document.getElementById('sentTo').textContent = sentToText;
+                    document.getElementById('verificationModal').classList.add('active');
+                } else {
+                    alert(data.detail || 'Signup failed. Please try again.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'CLAIM MY VIP SPOT';
+                }
+            } catch (error) {
+                alert('Network error. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'CLAIM MY VIP SPOT';
+            }
+        });
+
+        // Code input handling
+        const codeInputs = document.querySelectorAll('.code-digit');
+        codeInputs.forEach((input, index) => {
+            input.addEventListener('input', function() {
+                if (this.value.length === 1 && index < codeInputs.length - 1) {
+                    codeInputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && this.value === '' && index > 0) {
+                    codeInputs[index - 1].focus();
+                }
+            });
+        });
+
+        // Verify code
+        document.getElementById('verifyBtn').addEventListener('click', async function() {
+            const code = Array.from(codeInputs).map(input => input.value).join('');
+
+            if (code.length !== 6) {
+                alert('Please enter the complete 6-digit code');
+                return;
+            }
+
+            this.disabled = true;
+            this.textContent = 'VERIFYING...';
+
+            try {
+                const response = await fetch(`${API_URL}/api/verify`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: userEmail,
+                        code: code
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    document.getElementById('verificationStep').style.display = 'none';
+                    document.getElementById('successMessage').classList.add('active');
+                } else {
+                    alert(data.detail || 'Invalid code. Please try again.');
+                    codeInputs.forEach(input => input.value = '');
+                    codeInputs[0].focus();
+                    this.disabled = false;
+                    this.textContent = 'Verify';
+                }
+            } catch (error) {
+                alert('Verification failed. Please try again.');
+                this.disabled = false;
+                this.textContent = 'Verify';
+            }
+        });
+    </script>
+</body>
+</html>
