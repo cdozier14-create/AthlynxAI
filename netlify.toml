@@ -1,15 +1,10 @@
 [build]
   base = "frontend"
   publish = "."
-  command = ""
+  command = "echo 'Static site - no build required'"
 
 [functions]
-  node_bundler = "nft"
-  external_node_modules = [
-    "@babel/preset-typescript",
-    "@tailwindcss/oxide",
-    "lightningcss"
-  ]
+  directory = "netlify/functions"
 
 [[redirects]]
   from = "/*"
