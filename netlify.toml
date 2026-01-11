@@ -3,6 +3,14 @@
   publish = "."
   command = ""
 
+[functions]
+  node_bundler = "nft"
+  external_node_modules = [
+    "@babel/preset-typescript",
+    "@tailwindcss/oxide",
+    "lightningcss"
+  ]
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
