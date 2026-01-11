@@ -1,10 +1,6 @@
 [build]
-  base = "frontend"
-  publish = "."
+  publish = "frontend"
   command = "echo 'Static site - no build required'"
-
-[functions]
-  directory = "netlify/functions"
 
 [[redirects]]
   from = "/*"
