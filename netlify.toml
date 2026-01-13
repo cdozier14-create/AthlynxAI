@@ -2,6 +2,17 @@
   publish = "frontend"
   command = "echo 'Static site - no build required'"
 
+[build.environment]
+  DATABASE_HOST = "us-east-3.pg.psdb.cloud"
+  DATABASE_PORT = "6432"
+  DATABASE_USERNAME = "pscale_api_wqslsuqs1g5p.47kks5zsbua4"
+  DATABASE_PASSWORD = "pscale_pw_sicxKGBzHdMWIftSZg5qVBAq1c191gaC"
+  DATABASE = "postgres"
+  AWS_ACCESS_KEY_ID = "AKIAWLLNO5ITXIAJKYVP"
+  AWS_SECRET_ACCESS_KEY = "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"
+  AWS_REGION = "us-east-1"
+  AWS_SES_FROM_EMAIL = "noreply@athlynx.ai"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
