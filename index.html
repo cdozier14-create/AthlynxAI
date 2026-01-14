@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATHLYNX - The Athlete's Playbook</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0a1628 0%, #1a365d 50%, #0a1628 100%); min-height: 100vh; color: white; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; padding: 40px 20px; }
+        .logo { width: 120px; height: 120px; margin: 0 auto 20px; }
+        .logo img { width: 100%; height: 100%; object-fit: contain; }
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; background: linear-gradient(90deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .tagline { font-size: 1.2rem; color: #94a3b8; margin-bottom: 30px; }
+        .status-bar { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
+        .status-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #60a5fa; }
+        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; }
+        .cta-section { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; margin-bottom: 40px; text-align: center; }
+        .cta-title { font-size: 1.5rem; margin-bottom: 20px; }
+        .btn { display: inline-block; padding: 15px 40px; border-radius: 10px; font-weight: 600; text-decoration: none; margin: 10px; transition: all 0.3s; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: linear-gradient(90deg, #3b82f6, #8b5cf6); color: white; }
+        .btn-secondary { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(59,130,246,0.3); }
+        .apps-section { margin-bottom: 40px; }
+        .apps-title { text-align: center; font-size: 1.5rem; margin-bottom: 30px; }
+        .apps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+        .app-card { background: rgba(30,41,59,0.8); border-radius: 15px; padding: 25px; text-align: center; transition: all 0.3s; }
+        .app-card:hover { transform: translateY(-5px); background: rgba(30,41,59,1); }
+        .app-icon { width: 60px; height: 60px; margin: 0 auto 15px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .app-name { font-weight: 600; margin-bottom: 5px; }
+        .app-badge { font-size: 0.7rem; padding: 3px 10px; border-radius: 20px; background: #22c55e; color: white; display: inline-block; }
+        .app-badge.new { background: #8b5cf6; }
+        .app-badge.hot { background: #f59e0b; }
+        .app-badge.elite { background: #3b82f6; }
+        .waitlist-form { max-width: 500px; margin: 0 auto; }
+        .form-group { margin-bottom: 15px; }
+        .form-group input, .form-group select { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: white; font-size: 1rem; }
+        .form-group input::placeholder { color: #94a3b8; }
+        .form-group select { color: #94a3b8; }
+        .form-group select option { background: #1e293b; color: white; }
+        .footer { text-align: center; padding: 40px; color: #64748b; font-size: 0.9rem; }
+        .footer a { color: #60a5fa; text-decoration: none; }
+        @media (max-width: 768px) { h1 { font-size: 1.8rem; } .apps-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="athlynx-logo.png" alt="ATHLYNX" onerror="this.parentElement.innerHTML='<div style=font-size:60px>🦁</div>'">
+            </div>
+            <h1>ATHLYNX</h1>
+            <p class="tagline">THE ATHLETE'S PLAYBOOK</p>
+            <div class="status-bar">
+                <div class="status-item"><span class="status-dot"></span> LIVE PLATFORM</div>
+                <div class="status-item"><span class="status-dot"></span> HIPAA-compliant</div>
+                <div class="status-item"><span class="status-dot"></span> Protecting our precious cargo</div>
+            </div>
+        </header>
+
+        <section class="cta-section">
+            <h2 class="cta-title">Already Have a VIP Code?</h2>
+            <a href="/portal" class="btn btn-primary">LOGIN TO PORTAL</a>
+            <a href="/founders" class="btn btn-secondary">Founders</a>
+        </section>
+
+        <section class="apps-section">
+            <h2 class="apps-title">THE COMPLETE ATHLETE ECOSYSTEM</h2>
+            <div class="apps-grid">
+                <div class="app-card"><div class="app-icon">🏠</div><div class="app-name">Portal</div><span class="app-badge">LIVE</span></div>
+                <div class="app-card"><div class="app-icon">💬</div><div class="app-name">Messenger</div><span class="app-badge">LIVE</span></div>
+                <div class="app-card"><div class="app-icon">💎</div><div class="app-name">Diamond Grind</div><span class="app-badge new">NEW</span></div>
+                <div class="app-card"><div class="app-icon">📖</div><div class="app-name">Warriors Playbook</div><span class="app-badge hot">HOT</span></div>
+                <div class="app-card"><div class="app-icon">🔄</div><div class="app-name">Transfer Portal</div><span class="app-badge elite">ELITE</span></div>
+                <div class="app-card"><div class="app-icon">💰</div><div class="app-name">NIL Vault</div><span class="app-badge">$$$</span></div>
+                <div class="app-card"><div class="app-icon">🤖</div><div class="app-name">AI Sales</div><span class="app-badge">AI</span></div>
+                <div class="app-card"><div class="app-icon">🙏</div><div class="app-name">Faith</div><span class="app-badge">BLESSED</span></div>
+                <div class="app-card"><div class="app-icon">🎯</div><div class="app-name">AI Recruiter</div><span class="app-badge">AI</span></div>
+                <div class="app-card"><div class="app-icon">📱</div><div class="app-name">AI Content</div><span class="app-badge">AI</span></div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2 class="cta-title">JOIN THE VIP WAITLIST</h2>
+            <p style="color: #94a3b8; margin-bottom: 20px;">Be one of the first 10,000 founding members</p>
+            <form class="waitlist-form" id="waitlistForm">
+                <div class="form-group"><input type="text" placeholder="Full Name" required></div>
+                <div class="form-group"><input type="email" placeholder="Email" required></div>
+                <div class="form-group"><input type="tel" placeholder="Phone (+1...)" required></div>
+                <div class="form-group">
+                    <select required>
+                        <option value="">Select Role</option>
+                        <option>Athlete</option>
+                        <option>Coach</option>
+                        <option>Parent</option>
+                        <option>Brand/Sponsor</option>
+                        <option>Agent</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">CLAIM MY VIP SPOT</button>
+            </form>
+        </section>
+
+        <footer class="footer">
+            <p>2026 ATHLYNX AI Corporation | Parent Company: <a href="#">Dozier Holdings Group</a></p>
+            <p style="margin-top: 10px;">DREAMS DO COME TRUE 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
