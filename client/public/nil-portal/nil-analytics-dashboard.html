@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIL Portal - Analytics Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .stat-value {
+            font-size: 42px;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #718096;
+            margin-bottom: 10px;
+        }
+
+        .stat-change {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .stat-change.positive {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .stat-change.negative {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .chart-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .chart-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 20px;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+        }
+
+        .table-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #1a365d;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:hover {
+            background: #f7fafc;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-accepted {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status-pending {
+            background: #feebc8;
+            color: #7c2d12;
+        }
+
+        .status-rejected {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .filters {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 8px;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .insights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .insight-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 30px;
+            color: white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .insight-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .insight-card p {
+            font-size: 16px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+    
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .container { padding: 0; }
+            .header h1 { font-size: 24px !important; }
+            .header p { font-size: 14px !important; }
+            .grid, .deals-grid, .contracts-grid, .analytics-grid, .videos-grid, .system-cards {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+            }
+            .card, .deal-card, .contract-card, .stat-card, .video-card, .system-card {
+                padding: 15px !important;
+            }
+            .tabs { flex-direction: column !important; gap: 5px !important; }
+            .tab { padding: 10px 15px !important; font-size: 14px !important; }
+            .detail-row, .stat-row { flex-direction: column !important; gap: 5px !important; }
+            .btn { width: 100% !important; padding: 12px !important; }
+            input, select, textarea { font-size: 16px !important; }
+        }
+
+    </style>
+</head>
+<body>
+<!-- Quick Links Navigation Component -->
+<!-- Add this to the top of each NIL Portal page -->
+
+<style>
+    .quick-links-banner {
+        background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+        padding: 15px 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .quick-links-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .quick-links-title {
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .quick-links-grid {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        flex: 1;
+        justify-content: flex-end;
+    }
+
+    .quick-link-btn {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+    }
+
+    .quick-link-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .quick-link-btn.active {
+        background: white;
+        color: #1a365d;
+        font-weight: 600;
+    }
+
+    .quick-link-icon {
+        font-size: 16px;
+    }
+
+    @media (max-width: 768px) {
+        .quick-links-container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .quick-links-grid {
+            width: 100%;
+            justify-content: flex-start;
+        }
+
+        .quick-link-btn {
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+
+        .quick-links-title {
+            font-size: 16px;
+        }
+    }
+</style>
+
+<div class="quick-links-banner">
+    <div class="quick-links-container">
+        <div class="quick-links-title"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/KHzrDvBZiAakNikH.jpg" alt="NIL Portal" style="width: 32px; height: 32px; border-radius: 6px; vertical-align: middle; margin-right: 8px;"> NIL Portal</div>
+        <div class="quick-links-grid">
+            <a href="https://8080-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer" class="quick-link-btn" id="link-website">
+                <span class="quick-link-icon">🌐</span>
+                <span>Website</span>
+            </a>
+            <a href="https://8081-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer" class="quick-link-btn" id="link-mobile">
+                <span class="quick-link-icon">📱</span>
+                <span>Mobile App</span>
+            </a>
+            <a href="https://8082-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer" class="quick-link-btn" id="link-messenger">
+                <span class="quick-link-icon">💬</span>
+                <span>Messenger</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-subscribers.html" class="quick-link-btn" id="link-subscribers">
+                <span class="quick-link-icon">👥</span>
+                <span>Users</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-admin-system.html" class="quick-link-btn" id="link-admin">
+                <span class="quick-link-icon">⚙️</span>
+                <span>Admin</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-deals-marketplace.html" class="quick-link-btn" id="link-deals">
+                <span class="quick-link-icon">💼</span>
+                <span>Deals</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-video-upload.html" class="quick-link-btn" id="link-video">
+                <span class="quick-link-icon">🎥</span>
+                <span>Videos</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-analytics-dashboard.html" class="quick-link-btn" id="link-analytics">
+                <span class="quick-link-icon">📊</span>
+                <span>Analytics</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-contract-management.html" class="quick-link-btn" id="link-contracts">
+                <span class="quick-link-icon">📄</span>
+                <span>Contracts</span>
+            </a>
+            <a href="https://8084-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-transfer-portal.html" class="quick-link-btn" id="link-transfer">
+                <span class="quick-link-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/pYVQVaJhXNhqoJJO.png" style="width:20px;height:20px;border-radius:4px;"></span>
+                <span>Transfer</span>
+            </a>
+            <a href="https://8080-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-portal-app/website/index.html#fuel-bots" class="quick-link-btn" id="link-fuelbots">
+                <span class="quick-link-icon">🤖</span>
+                <span>Fuel Bots</span>
+            </a>
+            <a href="https://8080-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-portal-app/website/index.html#wellness" class="quick-link-btn" id="link-wellness">
+                <span class="quick-link-icon">💚</span>
+                <span>Wellness</span>
+            </a>
+            <a href="https://8080-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-portal-app/website/dhg-corporate-structure.html" class="quick-link-btn" id="link-dhg">
+                <span class="quick-link-icon">🏢</span>
+                <span>DHG Corp</span>
+            </a>
+            <a href="https://9000-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-quick-links-hub.html" class="quick-link-btn" id="link-hub">
+                <span class="quick-link-icon">🔗</span>
+                <span>Hub</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Highlight the current page
+    (function() {
+        const currentPort = window.location.port;
+        const currentPath = window.location.pathname;
+        
+        // Map ports to link IDs
+        const portMap = {
+            '8080': 'link-website',
+            '8081': 'link-mobile',
+            '8082': 'link-messenger',
+            '8083': 'link-subscribers',
+            '8084': 'link-admin',
+            '8085': 'link-deals',
+            '8086': 'link-video',
+            '8087': 'link-analytics',
+            '8088': 'link-contracts'
+        };
+        
+        const activeLink = document.getElementById(portMap[currentPort]);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    })();
+</script>
+
+
+    <div class="container">
+        <div class="header">
+            <h1>📊 Analytics Dashboard</h1>
+            <p>Track your NIL Portal performance and engagement metrics</p>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label>Time Period</label>
+                <select id="timePeriod" onchange="updateDashboard()">
+                    <option value="7">Last 7 Days</option>
+                    <option value="30" selected>Last 30 Days</option>
+                    <option value="90">Last 90 Days</option>
+                    <option value="365">Last Year</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Sport</label>
+                <select id="sportFilter" onchange="updateDashboard()">
+                    <option value="all">All Sports</option>
+                    <option value="baseball">Baseball</option>
+                    <option value="football">Football</option>
+                    <option value="basketball">Basketball</option>
+                    <option value="soccer">Soccer</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Metric Type</label>
+                <select id="metricType" onchange="updateDashboard()">
+                    <option value="all">All Metrics</option>
+                    <option value="deals">NIL Deals</option>
+                    <option value="messages">Messages</option>
+                    <option value="profile">Profile Views</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="stat-card">
+                <div class="stat-icon">💼</div>
+                <div class="stat-value" id="totalDeals">24</div>
+                <div class="stat-label">Total Deal Applications</div>
+                <span class="stat-change positive">+18% from last month</span>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-value" id="acceptedDeals">8</div>
+                <div class="stat-label">Accepted Deals</div>
+                <span class="stat-change positive">+33% success rate</span>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">💬</div>
+                <div class="stat-value" id="totalMessages">156</div>
+                <div class="stat-label">Messages Sent/Received</div>
+                <span class="stat-change positive">+42% engagement</span>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">👁️</div>
+                <div class="stat-value" id="profileViews">1,247</div>
+                <div class="stat-label">Profile Views</div>
+                <span class="stat-change positive">+28% visibility</span>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🎥</div>
+                <div class="stat-value" id="videoViews">892</div>
+                <div class="stat-label">Video Views</div>
+                <span class="stat-change positive">+55% reach</span>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-value">$12,500</div>
+                <div class="stat-label">Total Deal Value</div>
+                <span class="stat-change positive">+67% revenue</span>
+            </div>
+        </div>
+
+        <div class="insights">
+            <div class="insight-card">
+                <h3>🚀 Top Performing Content</h3>
+                <p>Your basketball highlight reel has 3x more views than average. Consider creating more similar content!</p>
+            </div>
+            <div class="insight-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <h3>📈 Growth Opportunity</h3>
+                <p>Brands in the sports nutrition category are 2x more likely to accept your applications. Focus on these deals!</p>
+            </div>
+            <div class="insight-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <h3>⏰ Best Posting Time</h3>
+                <p>Your profile gets 45% more views between 6-8 PM. Schedule your content for maximum engagement!</p>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">Deal Application Success Rate Over Time</div>
+            <div class="chart-wrapper">
+                <canvas id="successRateChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">Message Engagement by Day</div>
+            <div class="chart-wrapper">
+                <canvas id="messageEngagementChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">Profile Views & Video Views Comparison</div>
+            <div class="chart-wrapper">
+                <canvas id="viewsComparisonChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">Deal Applications by Brand Category</div>
+            <div class="chart-wrapper">
+                <canvas id="brandCategoryChart"></canvas>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div class="chart-title">Recent Deal Applications</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Deal Type</th>
+                        <th>Value</th>
+                        <th>Applied Date</th>
+                        <th>Status</th>
+                        <th>Response Time</th>
+                    </tr>
+                </thead>
+                <tbody id="dealsTable">
+                    <tr>
+                        <td>Nike</td>
+                        <td>Social Media Campaign</td>
+                        <td>$5,000</td>
+                        <td>2024-12-15</td>
+                        <td><span class="status-badge status-accepted">Accepted</span></td>
+                        <td>3 days</td>
+                    </tr>
+                    <tr>
+                        <td>Gatorade</td>
+                        <td>Product Endorsement</td>
+                        <td>$3,500</td>
+                        <td>2024-12-14</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Under Armour</td>
+                        <td>Apparel Partnership</td>
+                        <td>$4,200</td>
+                        <td>2024-12-12</td>
+                        <td><span class="status-badge status-accepted">Accepted</span></td>
+                        <td>5 days</td>
+                    </tr>
+                    <tr>
+                        <td>Red Bull</td>
+                        <td>Event Appearance</td>
+                        <td>$2,000</td>
+                        <td>2024-12-10</td>
+                        <td><span class="status-badge status-rejected">Rejected</span></td>
+                        <td>7 days</td>
+                    </tr>
+                    <tr>
+                        <td>Adidas</td>
+                        <td>Video Content</td>
+                        <td>$3,800</td>
+                        <td>2024-12-08</td>
+                        <td><span class="status-badge status-accepted">Accepted</span></td>
+                        <td>4 days</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Success Rate Chart
+        const successRateCtx = document.getElementById('successRateChart').getContext('2d');
+        new Chart(successRateCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Success Rate (%)',
+                    data: [25, 30, 28, 33],
+                    borderColor: '#2b6cb0',
+                    backgroundColor: 'rgba(43, 108, 176, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Message Engagement Chart
+        const messageEngagementCtx = document.getElementById('messageEngagementChart').getContext('2d');
+        new Chart(messageEngagementCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Messages',
+                    data: [18, 25, 32, 28, 35, 22, 15],
+                    backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                    borderColor: '#667eea',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Views Comparison Chart
+        const viewsComparisonCtx = document.getElementById('viewsComparisonChart').getContext('2d');
+        new Chart(viewsComparisonCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Profile Views',
+                    data: [245, 312, 398, 492],
+                    borderColor: '#2b6cb0',
+                    backgroundColor: 'rgba(43, 108, 176, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Video Views',
+                    data: [156, 223, 287, 326],
+                    borderColor: '#e53e3e',
+                    backgroundColor: 'rgba(229, 62, 62, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Brand Category Chart
+        const brandCategoryCtx = document.getElementById('brandCategoryChart').getContext('2d');
+        new Chart(brandCategoryCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Apparel', 'Sports Nutrition', 'Equipment', 'Technology', 'Other'],
+                datasets: [{
+                    data: [35, 25, 20, 15, 5],
+                    backgroundColor: [
+                        '#2b6cb0',
+                        '#667eea',
+                        '#f093fb',
+                        '#4facfe',
+                        '#718096'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'right'
+                    }
+                }
+            }
+        });
+
+        function updateDashboard() {
+            // Simulate data refresh based on filters
+            const timePeriod = document.getElementById('timePeriod').value;
+            const sport = document.getElementById('sportFilter').value;
+            const metric = document.getElementById('metricType').value;
+            
+            console.log('Updating dashboard with filters:', { timePeriod, sport, metric });
+            
+            // In a real implementation, this would fetch new data from the API
+            // For now, we'll just show an alert
+            alert(`Dashboard updated for ${timePeriod} days, ${sport} sport, ${metric} metrics`);
+        }
+
+        // Auto-refresh every 30 seconds
+        setInterval(() => {
+            console.log('Auto-refreshing dashboard data...');
+            // In production, this would fetch fresh data from the API
+        }, 30000);
+    </script>
+</body>
+</html>

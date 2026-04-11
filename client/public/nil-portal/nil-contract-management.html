@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIL Portal - Contract Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 15px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px 30px;
+            background: transparent;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: white;
+            color: #1a365d;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .contracts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .contracts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            .contract-card {
+                padding: 20px;
+            }
+            
+            .detail-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        .contract-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contract-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contract-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #2b6cb0, #667eea);
+        }
+
+        .contract-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 20px;
+        }
+
+        .contract-brand {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a365d;
+        }
+
+        .contract-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status-pending {
+            background: #feebc8;
+            color: #7c2d12;
+        }
+
+        .status-completed {
+            background: #bee3f8;
+            color: #1a365d;
+        }
+
+        .status-draft {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .contract-details {
+            margin-bottom: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .detail-label {
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: #1a365d;
+            font-weight: 600;
+        }
+
+        .milestones {
+            margin-top: 20px;
+        }
+
+        .milestone {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: #f7fafc;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .milestone-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .milestone-text {
+            flex: 1;
+            color: #4a5568;
+        }
+
+        .milestone-amount {
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+
+        .milestone.completed {
+            opacity: 0.6;
+        }
+
+        .milestone.completed .milestone-text {
+            text-decoration: line-through;
+        }
+
+        .contract-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2b6cb0, #1a365d);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #1a365d;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .signature-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signature-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .signature-canvas {
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: crosshair;
+            width: 100%;
+            height: 200px;
+            background: white;
+        }
+
+        .signature-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2b6cb0;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contract-form {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1a365d;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2b6cb0;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e2e8f0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #2b6cb0;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #2b6cb0;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: #718096;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 5px;
+        }
+
+        .timeline-description {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            padding: 30px;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 32px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .detail-section {
+            margin-bottom: 25px;
+        }
+
+        .detail-section h3 {
+            color: #1a365d;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .detail-section p {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 15px;
+            background: #f7fafc;
+            border-radius: 10px;
+        }
+
+        .detail-grid div {
+            color: #2d3748;
+        }
+
+        .detail-grid strong {
+            color: #1a365d;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .milestone-detail {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f7fafc;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid #cbd5e0;
+        }
+
+        .milestone-detail.completed {
+            background: #c6f6d5;
+            border-left-color: #38a169;
+        }
+
+        .milestone-icon {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .milestone-detail.completed .milestone-icon {
+            color: #38a169;
+        }
+
+        .milestone-task {
+            flex: 1;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .milestone-amt {
+            font-weight: 600;
+            color: #2b6cb0;
+            font-size: 16px;
+        }
+
+        .milestone-status {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .milestone-detail.completed .milestone-status {
+            background: #38a169;
+            color: white;
+        }
+
+        .milestone-detail:not(.completed) .milestone-status {
+            background: #feebc8;
+            color: #7c2d12;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .modal-actions .btn {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+<!-- Quick Links Navigation Component -->
+<!-- Add this to the top of each NIL Portal page -->
+
+<style>
+    .quick-links-banner {
+        background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+        padding: 15px 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .quick-links-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .quick-links-title {
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .quick-links-grid {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        flex: 1;
+        justify-content: flex-end;
+    }
+
+    .quick-link-btn {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+    }
+
+    .quick-link-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .quick-link-btn.active {
+        background: white;
+        color: #1a365d;
+        font-weight: 600;
+    }
+
+    .quick-link-icon {
+        font-size: 16px;
+    }
+
+    @media (max-width: 768px) {
+        .quick-links-container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .quick-links-grid {
+            width: 100%;
+            justify-content: flex-start;
+        }
+
+        .quick-link-btn {
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+
+        .quick-links-title {
+            font-size: 16px;
+        }
+    }
+</style>
+
+<div class="quick-links-banner">
+    <div class="quick-links-container">
+        <div class="quick-links-title"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/KHzrDvBZiAakNikH.jpg" alt="NIL Portal" style="width: 32px; height: 32px; border-radius: 6px; vertical-align: middle; margin-right: 8px;"> NIL Portal</div>
+        <div class="quick-links-grid">
+            <a href="https://8080-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer" class="quick-link-btn" id="link-website">
+                <span class="quick-link-icon">🌐</span>
+                <span>Website</span>
+            </a>
+            <a href="https://8081-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer" class="quick-link-btn" id="link-mobile">
+                <span class="quick-link-icon">📱</span>
+                <span>Mobile App</span>
+            </a>
+            <a href="https://8082-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer" class="quick-link-btn" id="link-messenger">
+                <span class="quick-link-icon">💬</span>
+                <span>Messenger</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-subscribers.html" class="quick-link-btn" id="link-subscribers">
+                <span class="quick-link-icon">👥</span>
+                <span>Users</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-admin-system.html" class="quick-link-btn" id="link-admin">
+                <span class="quick-link-icon">⚙️</span>
+                <span>Admin</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-deals-marketplace.html" class="quick-link-btn" id="link-deals">
+                <span class="quick-link-icon">💼</span>
+                <span>Deals</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-video-upload.html" class="quick-link-btn" id="link-video">
+                <span class="quick-link-icon">🎥</span>
+                <span>Videos</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-analytics-dashboard.html" class="quick-link-btn" id="link-analytics">
+                <span class="quick-link-icon">📊</span>
+                <span>Analytics</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-contract-management.html" class="quick-link-btn" id="link-contracts">
+                <span class="quick-link-icon">📄</span>
+                <span>Contracts</span>
+            </a>
+            <a href="https://8084-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-transfer-portal.html" class="quick-link-btn" id="link-transfer">
+                <span class="quick-link-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/pYVQVaJhXNhqoJJO.png" style="width:20px;height:20px;border-radius:4px;"></span>
+                <span>Transfer</span>
+            </a>
+            <a href="https://8080-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-portal-app/website/index.html#fuel-bots" class="quick-link-btn" id="link-fuelbots">
+                <span class="quick-link-icon">🤖</span>
+                <span>Fuel Bots</span>
+            </a>
+            <a href="https://8080-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-portal-app/website/index.html#wellness" class="quick-link-btn" id="link-wellness">
+                <span class="quick-link-icon">💚</span>
+                <span>Wellness</span>
+            </a>
+            <a href="https://8080-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-portal-app/website/dhg-corporate-structure.html" class="quick-link-btn" id="link-dhg">
+                <span class="quick-link-icon">🏢</span>
+                <span>DHG Corp</span>
+            </a>
+            <a href="https://9000-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-quick-links-hub.html" class="quick-link-btn" id="link-hub">
+                <span class="quick-link-icon">🔗</span>
+                <span>Hub</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Highlight the current page
+    (function() {
+        const currentPort = window.location.port;
+        const currentPath = window.location.pathname;
+        
+        // Map ports to link IDs
+        const portMap = {
+            '8080': 'link-website',
+            '8081': 'link-mobile',
+            '8082': 'link-messenger',
+            '8083': 'link-subscribers',
+            '8084': 'link-admin',
+            '8085': 'link-deals',
+            '8086': 'link-video',
+            '8087': 'link-analytics',
+            '8088': 'link-contracts'
+        };
+        
+        const activeLink = document.getElementById(portMap[currentPort]);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    })();
+</script>
+
+
+    <div class="container">
+        <div class="header">
+            <h1>📄 Contract Management</h1>
+            <p>Manage your NIL deals, track milestones, and sign contracts digitally</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">8</div>
+                <div class="stat-label">Active Contracts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">$12,500</div>
+                <div class="stat-label">Total Value</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">$8,200</div>
+                <div class="stat-label">Earned to Date</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Completed Milestones</div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('active')">Active Contracts</button>
+            <button class="tab" onclick="switchTab('pending')">Pending Signature</button>
+            <button class="tab" onclick="switchTab('completed')">Completed</button>
+            <button class="tab" onclick="switchTab('create')">Create New</button>
+        </div>
+
+        <div id="activeTab" class="tab-content active">
+            <div class="contracts-grid">
+                <div class="contract-card">
+                    <div class="contract-header">
+                        <div class="contract-brand">Nike</div>
+                        <span class="contract-status status-active">Active</span>
+                    </div>
+                    <div class="contract-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Contract Value</span>
+                            <span class="detail-value">$5,000</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Start Date</span>
+                            <span class="detail-value">Dec 15, 2024</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">End Date</span>
+                            <span class="detail-value">Mar 15, 2025</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Progress</span>
+                            <span class="detail-value">60% Complete</span>
+                        </div>
+                    </div>
+                    <div class="milestones">
+                        <h4 style="margin-bottom: 10px; color: #1a365d;">Payment Milestones</h4>
+                        <div class="milestone completed">
+                            <input type="checkbox" class="milestone-checkbox" checked disabled>
+                            <span class="milestone-text">Initial social media post</span>
+                            <span class="milestone-amount">$2,000</span>
+                        </div>
+                        <div class="milestone completed">
+                            <input type="checkbox" class="milestone-checkbox" checked disabled>
+                            <span class="milestone-text">Video content creation</span>
+                            <span class="milestone-amount">$1,000</span>
+                        </div>
+                        <div class="milestone">
+                            <input type="checkbox" class="milestone-checkbox" onclick="completeMilestone(this)">
+                            <span class="milestone-text">Event appearance</span>
+                            <span class="milestone-amount">$2,000</span>
+                        </div>
+                    </div>
+                    <div class="contract-actions">
+                        <button class="btn btn-primary" onclick="viewContract('Nike')">View Details</button>
+                        <button class="btn btn-secondary" onclick="downloadContract('Nike')">Download PDF</button>
+                    </div>
+                </div>
+
+                <div class="contract-card">
+                    <div class="contract-header">
+                        <div class="contract-brand">Under Armour</div>
+                        <span class="contract-status status-active">Active</span>
+                    </div>
+                    <div class="contract-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Contract Value</span>
+                            <span class="detail-value">$4,200</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Start Date</span>
+                            <span class="detail-value">Dec 12, 2024</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">End Date</span>
+                            <span class="detail-value">Jun 12, 2025</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Progress</span>
+                            <span class="detail-value">25% Complete</span>
+                        </div>
+                    </div>
+                    <div class="milestones">
+                        <h4 style="margin-bottom: 10px; color: #1a365d;">Payment Milestones</h4>
+                        <div class="milestone completed">
+                            <input type="checkbox" class="milestone-checkbox" checked disabled>
+                            <span class="milestone-text">Contract signing bonus</span>
+                            <span class="milestone-amount">$1,050</span>
+                        </div>
+                        <div class="milestone">
+                            <input type="checkbox" class="milestone-checkbox" onclick="completeMilestone(this)">
+                            <span class="milestone-text">Monthly social posts (3x)</span>
+                            <span class="milestone-amount">$1,050</span>
+                        </div>
+                        <div class="milestone">
+                            <input type="checkbox" class="milestone-checkbox" onclick="completeMilestone(this)">
+                            <span class="milestone-text">Product photoshoot</span>
+                            <span class="milestone-amount">$2,100</span>
+                        </div>
+                    </div>
+                    <div class="contract-actions">
+                        <button class="btn btn-primary" onclick="viewContract('Under Armour')">View Details</button>
+                        <button class="btn btn-secondary" onclick="downloadContract('Under Armour')">Download PDF</button>
+                    </div>
+                </div>
+
+                <div class="contract-card">
+                    <div class="contract-header">
+                        <div class="contract-brand">Adidas</div>
+                        <span class="contract-status status-active">Active</span>
+                    </div>
+                    <div class="contract-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Contract Value</span>
+                            <span class="detail-value">$3,800</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Start Date</span>
+                            <span class="detail-value">Dec 8, 2024</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">End Date</span>
+                            <span class="detail-value">May 8, 2025</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Progress</span>
+                            <span class="detail-value">33% Complete</span>
+                        </div>
+                    </div>
+                    <div class="milestones">
+                        <h4 style="margin-bottom: 10px; color: #1a365d;">Payment Milestones</h4>
+                        <div class="milestone completed">
+                            <input type="checkbox" class="milestone-checkbox" checked disabled>
+                            <span class="milestone-text">Video content delivery</span>
+                            <span class="milestone-amount">$1,266</span>
+                        </div>
+                        <div class="milestone">
+                            <input type="checkbox" class="milestone-checkbox" onclick="completeMilestone(this)">
+                            <span class="milestone-text">Instagram story series</span>
+                            <span class="milestone-amount">$1,267</span>
+                        </div>
+                        <div class="milestone">
+                            <input type="checkbox" class="milestone-checkbox" onclick="completeMilestone(this)">
+                            <span class="milestone-text">Campaign completion bonus</span>
+                            <span class="milestone-amount">$1,267</span>
+                        </div>
+                    </div>
+                    <div class="contract-actions">
+                        <button class="btn btn-primary" onclick="viewContract('Adidas')">View Details</button>
+                        <button class="btn btn-secondary" onclick="downloadContract('Adidas')">Download PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="pendingTab" class="tab-content">
+            <div class="contracts-grid">
+                <div class="contract-card">
+                    <div class="contract-header">
+                        <div class="contract-brand">Gatorade</div>
+                        <span class="contract-status status-pending">Pending Signature</span>
+                    </div>
+                    <div class="contract-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Contract Value</span>
+                            <span class="detail-value">$3,500</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Duration</span>
+                            <span class="detail-value">6 months</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Sent Date</span>
+                            <span class="detail-value">Dec 14, 2024</span>
+                        </div>
+                    </div>
+                    <div class="contract-actions">
+                        <button class="btn btn-primary" onclick="openSignatureModal('Gatorade')">Review & Sign</button>
+                        <button class="btn btn-secondary" onclick="downloadContract('Gatorade')">Download PDF</button>
+                    </div>
+                </div>
+
+                <div class="contract-card">
+                    <div class="contract-header">
+                        <div class="contract-brand">Foot Locker</div>
+                        <span class="contract-status status-pending">Pending Signature</span>
+                    </div>
+                    <div class="contract-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Contract Value</span>
+                            <span class="detail-value">$2,800</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Duration</span>
+                            <span class="detail-value">4 months</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Sent Date</span>
+                            <span class="detail-value">Dec 16, 2024</span>
+                        </div>
+                    </div>
+                    <div class="contract-actions">
+                        <button class="btn btn-primary" onclick="openSignatureModal('Foot Locker')">Review & Sign</button>
+                        <button class="btn btn-secondary" onclick="downloadContract('Foot Locker')">Download PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="completedTab" class="tab-content">
+            <div class="contracts-grid">
+                <div class="contract-card">
+                    <div class="contract-header">
+                        <div class="contract-brand">Red Bull</div>
+                        <span class="contract-status status-completed">Completed</span>
+                    </div>
+                    <div class="contract-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Contract Value</span>
+                            <span class="detail-value">$2,000</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Completed Date</span>
+                            <span class="detail-value">Nov 30, 2024</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Total Earned</span>
+                            <span class="detail-value">$2,000</span>
+                        </div>
+                    </div>
+                    <div class="contract-actions">
+                        <button class="btn btn-primary" onclick="viewContract('Red Bull')">View Details</button>
+                        <button class="btn btn-secondary" onclick="downloadContract('Red Bull')">Download PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="createTab" class="tab-content">
+            <div class="contract-form">
+                <h2 style="margin-bottom: 30px; color: #1a365d;">Create New Contract</h2>
+                <form id="newContractForm">
+                    <div class="form-group">
+                        <label>Brand/Company Name *</label>
+                        <input type="text" required placeholder="e.g., Nike">
+                    </div>
+                    <div class="form-group">
+                        <label>Contract Type *</label>
+                        <select required>
+                            <option value="">Select type...</option>
+                            <option value="social">Social Media Campaign</option>
+                            <option value="endorsement">Product Endorsement</option>
+                            <option value="appearance">Event Appearance</option>
+                            <option value="content">Content Creation</option>
+                            <option value="partnership">Long-term Partnership</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Total Contract Value ($) *</label>
+                        <input type="number" required placeholder="5000">
+                    </div>
+                    <div class="form-group">
+                        <label>Start Date *</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>End Date *</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Contract Description</label>
+                        <textarea placeholder="Describe the terms and deliverables..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Payment Milestones (one per line)</label>
+                        <textarea placeholder="e.g.,&#10;Initial post - $2000&#10;Video content - $1500&#10;Final campaign - $1500"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 18px;">Create Contract</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="signature-modal" id="signatureModal">
+        <div class="signature-content">
+            <h2 style="margin-bottom: 20px; color: #1a365d;">Digital Signature</h2>
+            <p style="margin-bottom: 20px; color: #718096;">Please sign below to accept the contract terms</p>
+            <canvas id="signatureCanvas" class="signature-canvas"></canvas>
+            <div class="signature-actions">
+                <button class="btn btn-secondary" onclick="clearSignature()">Clear</button>
+                <button class="btn btn-primary" onclick="saveSignature()">Sign Contract</button>
+                <button class="btn btn-secondary" onclick="closeSignatureModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTab = 'active';
+        let signatureCanvas, signatureCtx;
+        let isDrawing = false;
+        let currentBrand = '';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(tab + 'Tab').classList.add('active');
+        }
+
+        function viewContract(brand) {
+            // Get contract data
+            const contracts = {
+                'Nike': {
+                    brand: 'Nike',
+                    value: '$5,000',
+                    start: 'Dec 15, 2024',
+                    end: 'Mar 15, 2025',
+                    progress: '60%',
+                    description: 'Social media endorsement and content creation partnership. Athlete will create 3 Instagram posts, 2 TikTok videos, and attend 1 brand event.',
+                    terms: 'Exclusive footwear partnership for baseball season. Cannot wear competing brands during contract period.',
+                    milestones: [
+                        { task: 'Initial social media post', amount: '$2,000', status: 'completed' },
+                        { task: 'Video content creation', amount: '$1,000', status: 'completed' },
+                        { task: 'Event appearance', amount: '$2,000', status: 'pending' }
+                    ]
+                },
+                'Under Armour': {
+                    brand: 'Under Armour',
+                    value: '$4,200',
+                    start: 'Dec 12, 2024',
+                    end: 'Jun 12, 2025',
+                    progress: '45%',
+                    description: 'Training gear endorsement and youth camp appearance. Represent Under Armour at 2 youth baseball camps.',
+                    terms: 'Wear Under Armour gear during all practices and games. Social media mentions required.',
+                    milestones: [
+                        { task: 'Camp appearance #1', amount: '$1,500', status: 'completed' },
+                        { task: 'Social media series', amount: '$1,200', status: 'pending' },
+                        { task: 'Camp appearance #2', amount: '$1,500', status: 'pending' }
+                    ]
+                },
+                'Adidas': {
+                    brand: 'Adidas',
+                    value: '$2,300',
+                    start: 'Jan 10, 2025',
+                    end: 'Apr 10, 2025',
+                    progress: '30%',
+                    description: 'Baseball cleat showcase and product review partnership.',
+                    terms: 'Test new cleat line and provide feedback. Create unboxing video.',
+                    milestones: [
+                        { task: 'Product testing', amount: '$800', status: 'completed' },
+                        { task: 'Unboxing video', amount: '$1,000', status: 'pending' },
+                        { task: 'Final review', amount: '$500', status: 'pending' }
+                    ]
+                },
+                'Red Bull': {
+                    brand: 'Red Bull',
+                    value: '$1,000',
+                    start: 'Feb 1, 2025',
+                    end: 'May 1, 2025',
+                    progress: '0%',
+                    description: 'Energy drink partnership for training and game days.',
+                    terms: 'Feature Red Bull in training content. Attend 1 brand activation event.',
+                    milestones: [
+                        { task: 'Training content series', amount: '$600', status: 'pending' },
+                        { task: 'Brand event appearance', amount: '$400', status: 'pending' }
+                    ]
+                }
+            };
+
+            const contract = contracts[brand];
+            if (!contract) return;
+
+            // Create modal HTML
+            const modalHTML = `
+                <div class="modal-overlay" onclick="closeModal()">
+                    <div class="modal-content" onclick="event.stopPropagation()">
+                        <div class="modal-header">
+                            <h2>${contract.brand} Contract Details</h2>
+                            <button class="modal-close" onclick="closeModal()">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="detail-section">
+                                <h3>Contract Overview</h3>
+                                <div class="detail-grid">
+                                    <div><strong>Total Value:</strong> ${contract.value}</div>
+                                    <div><strong>Start Date:</strong> ${contract.start}</div>
+                                    <div><strong>End Date:</strong> ${contract.end}</div>
+                                    <div><strong>Progress:</strong> ${contract.progress} Complete</div>
+                                </div>
+                            </div>
+                            <div class="detail-section">
+                                <h3>Description</h3>
+                                <p>${contract.description}</p>
+                            </div>
+                            <div class="detail-section">
+                                <h3>Terms & Conditions</h3>
+                                <p>${contract.terms}</p>
+                            </div>
+                            <div class="detail-section">
+                                <h3>Payment Milestones</h3>
+                                ${contract.milestones.map(m => `
+                                    <div class="milestone-detail ${m.status}">
+                                        <span class="milestone-icon">${m.status === 'completed' ? '✓' : '○'}</span>
+                                        <span class="milestone-task">${m.task}</span>
+                                        <span class="milestone-amt">${m.amount}</span>
+                                        <span class="milestone-status">${m.status}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="modal-actions">
+                                <button class="btn btn-primary" onclick="downloadContract('${contract.brand}')">Download PDF</button>
+                                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Add modal to page
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+        }
+
+        function downloadContract(brand) {
+            alert(`Downloading ${brand} contract as PDF...\n\nIn production, this would generate and download a PDF contract.`);
+        }
+
+        function closeModal() {
+            const modal = document.querySelector('.modal-overlay');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        function completeMilestone(checkbox) {
+            const milestone = checkbox.closest('.milestone');
+            if (checkbox.checked) {
+                milestone.classList.add('completed');
+                alert('Milestone marked as complete! Payment will be processed within 5 business days.');
+            } else {
+                milestone.classList.remove('completed');
+            }
+        }
+
+        function openSignatureModal(brand) {
+            currentBrand = brand;
+            const modal = document.getElementById('signatureModal');
+            modal.style.display = 'flex';
+            
+            signatureCanvas = document.getElementById('signatureCanvas');
+            signatureCtx = signatureCanvas.getContext('2d');
+            
+            // Set canvas size
+            signatureCanvas.width = signatureCanvas.offsetWidth;
+            signatureCanvas.height = signatureCanvas.offsetHeight;
+            
+            // Setup drawing
+            signatureCanvas.addEventListener('mousedown', startDrawing);
+            signatureCanvas.addEventListener('mousemove', draw);
+            signatureCanvas.addEventListener('mouseup', stopDrawing);
+            signatureCanvas.addEventListener('mouseout', stopDrawing);
+            
+            // Touch support
+            signatureCanvas.addEventListener('touchstart', handleTouch);
+            signatureCanvas.addEventListener('touchmove', handleTouch);
+            signatureCanvas.addEventListener('touchend', stopDrawing);
+        }
+
+        function closeSignatureModal() {
+            document.getElementById('signatureModal').style.display = 'none';
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            const rect = signatureCanvas.getBoundingClientRect();
+            signatureCtx.beginPath();
+            signatureCtx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const rect = signatureCanvas.getBoundingClientRect();
+            signatureCtx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            signatureCtx.strokeStyle = '#1a365d';
+            signatureCtx.lineWidth = 2;
+            signatureCtx.lineCap = 'round';
+            signatureCtx.stroke();
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function handleTouch(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : 'mousemove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            signatureCanvas.dispatchEvent(mouseEvent);
+        }
+
+        function clearSignature() {
+            signatureCtx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+        }
+
+        function saveSignature() {
+            const signatureData = signatureCanvas.toDataURL();
+            alert(`Contract with ${currentBrand} signed successfully! You will receive a confirmation email shortly.`);
+            closeSignatureModal();
+            
+            // In production, this would send the signature to the server
+            console.log('Signature saved:', signatureData);
+        }
+
+        document.getElementById('newContractForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Contract created successfully! It has been sent to the brand for review.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIL Deals Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #fff;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: transparent;
+        }
+
+        .deals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .deal-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .deal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .deal-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 48px;
+        }
+
+        .deal-content {
+            padding: 20px;
+        }
+
+        .deal-brand {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .deal-title {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .deal-compensation {
+            color: #4facfe;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .deal-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .deal-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .deal-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 100%);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-content h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            color: #fff;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .deals-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+        }
+    
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .container { padding: 0; }
+            .header h1 { font-size: 24px !important; }
+            .header p { font-size: 14px !important; }
+            .grid, .deals-grid, .contracts-grid, .analytics-grid, .videos-grid, .system-cards {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+            }
+            .card, .deal-card, .contract-card, .stat-card, .video-card, .system-card {
+                padding: 15px !important;
+            }
+            .tabs { flex-direction: column !important; gap: 5px !important; }
+            .tab { padding: 10px 15px !important; font-size: 14px !important; }
+            .detail-row, .stat-row { flex-direction: column !important; gap: 5px !important; }
+            .btn { width: 100% !important; padding: 12px !important; }
+            input, select, textarea { font-size: 16px !important; }
+        }
+
+    </style>
+</head>
+<body>
+<!-- Quick Links Navigation Component -->
+<!-- Add this to the top of each NIL Portal page -->
+
+<style>
+    .quick-links-banner {
+        background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+        padding: 15px 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .quick-links-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .quick-links-title {
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .quick-links-grid {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        flex: 1;
+        justify-content: flex-end;
+    }
+
+    .quick-link-btn {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+    }
+
+    .quick-link-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .quick-link-btn.active {
+        background: white;
+        color: #1a365d;
+        font-weight: 600;
+    }
+
+    .quick-link-icon {
+        font-size: 16px;
+    }
+
+    @media (max-width: 768px) {
+        .quick-links-container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .quick-links-grid {
+            width: 100%;
+            justify-content: flex-start;
+        }
+
+        .quick-link-btn {
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+
+        .quick-links-title {
+            font-size: 16px;
+        }
+    }
+</style>
+
+<div class="quick-links-banner">
+    <div class="quick-links-container">
+        <div class="quick-links-title"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/KHzrDvBZiAakNikH.jpg" alt="NIL Portal" style="width: 32px; height: 32px; border-radius: 6px; vertical-align: middle; margin-right: 8px;"> NIL Portal</div>
+        <div class="quick-links-grid">
+            <a href="https://8080-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer" class="quick-link-btn" id="link-website">
+                <span class="quick-link-icon">🌐</span>
+                <span>Website</span>
+            </a>
+            <a href="https://8081-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer" class="quick-link-btn" id="link-mobile">
+                <span class="quick-link-icon">📱</span>
+                <span>Mobile App</span>
+            </a>
+            <a href="https://8082-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer" class="quick-link-btn" id="link-messenger">
+                <span class="quick-link-icon">💬</span>
+                <span>Messenger</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-subscribers.html" class="quick-link-btn" id="link-subscribers">
+                <span class="quick-link-icon">👥</span>
+                <span>Users</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-admin-system.html" class="quick-link-btn" id="link-admin">
+                <span class="quick-link-icon">⚙️</span>
+                <span>Admin</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-deals-marketplace.html" class="quick-link-btn" id="link-deals">
+                <span class="quick-link-icon">💼</span>
+                <span>Deals</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-video-upload.html" class="quick-link-btn" id="link-video">
+                <span class="quick-link-icon">🎥</span>
+                <span>Videos</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-analytics-dashboard.html" class="quick-link-btn" id="link-analytics">
+                <span class="quick-link-icon">📊</span>
+                <span>Analytics</span>
+            </a>
+            <a href="https://8083-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-contract-management.html" class="quick-link-btn" id="link-contracts">
+                <span class="quick-link-icon">📄</span>
+                <span>Contracts</span>
+            </a>
+            <a href="https://8084-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-transfer-portal.html" class="quick-link-btn" id="link-transfer">
+                <span class="quick-link-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/pYVQVaJhXNhqoJJO.png" style="width:20px;height:20px;border-radius:4px;"></span>
+                <span>Transfer</span>
+            </a>
+            <a href="https://8080-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-portal-app/website/index.html#fuel-bots" class="quick-link-btn" id="link-fuelbots">
+                <span class="quick-link-icon">🤖</span>
+                <span>Fuel Bots</span>
+            </a>
+            <a href="https://8080-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-portal-app/website/index.html#wellness" class="quick-link-btn" id="link-wellness">
+                <span class="quick-link-icon">💚</span>
+                <span>Wellness</span>
+            </a>
+            <a href="https://8080-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-portal-app/website/dhg-corporate-structure.html" class="quick-link-btn" id="link-dhg">
+                <span class="quick-link-icon">🏢</span>
+                <span>DHG Corp</span>
+            </a>
+            <a href="https://9000-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer/nil-quick-links-hub.html" class="quick-link-btn" id="link-hub">
+                <span class="quick-link-icon">🔗</span>
+                <span>Hub</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Highlight the current page
+    (function() {
+        const currentPort = window.location.port;
+        const currentPath = window.location.pathname;
+        
+        // Map ports to link IDs
+        const portMap = {
+            '8080': 'link-website',
+            '8081': 'link-mobile',
+            '8082': 'link-messenger',
+            '8083': 'link-subscribers',
+            '8084': 'link-admin',
+            '8085': 'link-deals',
+            '8086': 'link-video',
+            '8087': 'link-analytics',
+            '8088': 'link-contracts'
+        };
+        
+        const activeLink = document.getElementById(portMap[currentPort]);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    })();
+</script>
+
+
+    <div class="container">
+        <div class="header">
+            <h1>💼 NIL Deals Marketplace</h1>
+            <p>Browse exclusive endorsement opportunities from top brands</p>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterDeals('all')">All Deals</button>
+            <button class="filter-btn" onclick="filterDeals('endorsement')">Endorsements</button>
+            <button class="filter-btn" onclick="filterDeals('social_media')">Social Media</button>
+            <button class="filter-btn" onclick="filterDeals('appearance')">Appearances</button>
+            <button class="filter-btn" onclick="filterDeals('content_creation')">Content</button>
+        </div>
+
+        <div id="dealsGrid" class="deals-grid"></div>
+    </div>
+
+    <!-- Application Modal -->
+    <div id="applicationModal" class="modal">
+        <div class="modal-content">
+            <h2>Apply for Deal</h2>
+            <div id="modalDealInfo"></div>
+            <form id="applicationForm">
+                <div class="form-group">
+                    <label>Why are you a good fit for this deal?</label>
+                    <textarea id="applicationMessage" required placeholder="Tell the brand why you're the perfect match..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://3000-i9jy9g07ffwo8ex9ghc56-5b9ab382.manusvm.computer';
+        
+        // Sample NIL deals data
+        const deals = [
+            {
+                id: 1,
+                title: "Social Media Ambassador",
+                brand: "Nike",
+                description: "Promote Nike products on your social media channels. Post 3 times per week featuring Nike gear.",
+                compensation: 5000,
+                dealType: "social_media",
+                sport: "Basketball",
+                requirements: "10k+ followers, active engagement",
+                imageUrl: "",
+                status: "active"
+            },
+            {
+                id: 2,
+                title: "Game Day Appearance",
+                brand: "Gatorade",
+                description: "Appear at local Gatorade promotional events during game days. Meet fans and sign autographs.",
+                compensation: 2500,
+                dealType: "appearance",
+                sport: "Football",
+                requirements: "Available on weekends",
+                imageUrl: "",
+                status: "active"
+            },
+            {
+                id: 3,
+                title: "Training Video Series",
+                brand: "Under Armour",
+                description: "Create a 6-part training video series showcasing Under Armour training gear and techniques.",
+                compensation: 8000,
+                dealType: "content_creation",
+                sport: "All Sports",
+                requirements: "Video editing skills preferred",
+                imageUrl: "",
+                status: "active"
+            },
+            {
+                id: 4,
+                title: "Brand Ambassador Program",
+                brand: "Red Bull",
+                description: "Become a Red Bull athlete ambassador. Represent the brand at events and on social media.",
+                compensation: 15000,
+                dealType: "endorsement",
+                sport: "Extreme Sports",
+                requirements: "Professional athlete status",
+                imageUrl: "",
+                status: "active"
+            },
+            {
+                id: 5,
+                title: "Instagram Takeover",
+                brand: "Adidas",
+                description: "Take over Adidas' Instagram for a day. Share your training routine and game day prep.",
+                compensation: 3500,
+                dealType: "social_media",
+                sport: "Soccer",
+                requirements: "Strong Instagram presence",
+                imageUrl: "",
+                status: "active"
+            },
+            {
+                id: 6,
+                title: "Local Store Promotion",
+                brand: "Foot Locker",
+                description: "Host a meet-and-greet at your local Foot Locker store. Sign merchandise and take photos with fans.",
+                compensation: 1500,
+                dealType: "appearance",
+                sport: "All Sports",
+                requirements: "Available for 3-hour event",
+                imageUrl: "",
+                status: "active"
+            }
+        ];
+
+        let currentFilter = 'all';
+        let selectedDeal = null;
+
+        function renderDeals() {
+            const grid = document.getElementById('dealsGrid');
+            const filteredDeals = currentFilter === 'all' 
+                ? deals 
+                : deals.filter(d => d.dealType === currentFilter);
+
+            grid.innerHTML = filteredDeals.map(deal => `
+                <div class="deal-card" onclick="viewDeal(${deal.id})">
+                    <div class="deal-image">💼</div>
+                    <div class="deal-content">
+                        <div class="deal-brand">${deal.brand}</div>
+                        <div class="deal-title">${deal.title}</div>
+                        <div class="deal-compensation">$${deal.compensation.toLocaleString()}</div>
+                        <div class="deal-description">${deal.description}</div>
+                        <div class="deal-tags">
+                            <span class="tag">${deal.dealType.replace('_', ' ')}</span>
+                            <span class="tag">${deal.sport}</span>
+                        </div>
+                        <div class="deal-actions">
+                            <button class="btn btn-primary" onclick="applyForDeal(event, ${deal.id})">Apply Now</button>
+                            <button class="btn btn-secondary" onclick="viewDeal(${deal.id})">Details</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterDeals(type) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderDeals();
+        }
+
+        function applyForDeal(event, dealId) {
+            event.stopPropagation();
+            selectedDeal = deals.find(d => d.id === dealId);
+            
+            document.getElementById('modalDealInfo').innerHTML = `
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+                    <h3 style="color: #fff; margin-bottom: 10px;">${selectedDeal.title}</h3>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 5px;">${selectedDeal.brand}</p>
+                    <p style="color: #4facfe; font-size: 24px; font-weight: bold;">$${selectedDeal.compensation.toLocaleString()}</p>
+                </div>
+            `;
+            
+            document.getElementById('applicationModal').classList.add('active');
+        }
+
+        function viewDeal(dealId) {
+            const deal = deals.find(d => d.id === dealId);
+            alert(`${deal.title}\n\n${deal.description}\n\nCompensation: $${deal.compensation.toLocaleString()}\n\nRequirements: ${deal.requirements}`);
+        }
+
+        function closeModal() {
+            document.getElementById('applicationModal').classList.remove('active');
+            document.getElementById('applicationForm').reset();
+        }
+
+        document.getElementById('applicationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const message = document.getElementById('applicationMessage').value;
+            
+            // In production, send to API
+            console.log('Applying for deal:', selectedDeal.id, 'Message:', message);
+            
+            alert(`Application submitted successfully!\n\nYou've applied for: ${selectedDeal.title}\n\nThe brand will review your application and contact you soon.`);
+            closeModal();
+        });
+
+        // Initial render
+        renderDeals();
+    </script>
+</body>
+</html>

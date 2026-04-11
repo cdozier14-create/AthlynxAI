@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dozier Holdings Group - Corporate Structure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .header h1 {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p {
+            font-size: 20px;
+            color: rgba(255,255,255,0.7);
+        }
+        .date {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 10px;
+        }
+        
+        /* Parent Company */
+        .parent-company {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
+        }
+        .parent-company h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .parent-company p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Leadership */
+        .leadership {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+        .leadership h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #60a5fa;
+        }
+        .leaders-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .leader-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .leader-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .leader-card p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* Divisions */
+        .divisions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .division {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .division h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid;
+        }
+        .division.tech h3 { border-color: #3b82f6; color: #60a5fa; }
+        .division.realestate h3 { border-color: #22c55e; color: #4ade80; }
+        .division.trading h3 { border-color: #f59e0b; color: #fbbf24; }
+        
+        .subsidiary {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+        .subsidiary h4 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .subsidiary p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.5;
+        }
+        .subsidiary.new {
+            border: 2px solid #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+        .subsidiary.new::before {
+            content: "NEW";
+            background: #3b82f6;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+        
+        /* Org Chart Visual */
+        .org-chart {
+            margin-top: 60px;
+            text-align: center;
+        }
+        .org-chart h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #60a5fa;
+        }
+        .chart-container {
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            padding: 40px;
+            overflow-x: auto;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+        
+        @media (max-width: 1024px) {
+            .divisions { grid-template-columns: 1fr; }
+            .leaders-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .leaders-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>DOZIER HOLDINGS GROUP</h1>
+            <p>Corporate Structure & Subsidiaries</p>
+            <div class="date">Updated: January 2025</div>
+        </div>
+        
+        <div class="parent-company">
+            <h2>Dozier Holdings Group, LLC</h2>
+            <p>The governing company of all subsidiary LLCs. DHG focuses on technology, real estate, and special market businesses through strategic investments and operational excellence.</p>
+        </div>
+        
+        <div class="leadership">
+            <h3>Executive Leadership Team</h3>
+            <div class="leaders-grid">
+                <div class="leader-card">
+                    <h4>Chad A. Dozier</h4>
+                    <p>Chairman & President</p>
+                </div>
+                <div class="leader-card">
+                    <h4>Glenn Tse</h4>
+                    <p>VP of Business Development</p>
+                </div>
+                <div class="leader-card">
+                    <h4>Jimmy Boyd</h4>
+                    <p>VP of Property Development</p>
+                </div>
+                <div class="leader-card">
+                    <h4>Andrew Kustes</h4>
+                    <p>VP of Technology</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divisions">
+            <!-- Technology Division -->
+            <div class="division tech">
+                <h3>🖥️ Technology Division</h3>
+                
+                <div class="subsidiary new">
+                    <h4>NIL Portal Inc.</h4>
+                    <p>Complete athlete ecosystem platform. NIL Portal App (social network), NIL Messenger App (private communications), Transfer Portal, Deals Marketplace, and athlete management tools.</p>
+                </div>
+                
+                <div class="subsidiary new">
+                    <h4>Softmor Inc.</h4>
+                    <p>Enterprise hardware infrastructure, US manufacturing for robotics & drones, AI-powered datacenter solutions. $22.4M hardware capability with 753 high-performance nodes.</p>
+                </div>
+                
+                <div class="subsidiary">
+                    <h4>VC Technologies, LLC</h4>
+                    <p>R&D technologies, design data centers, cryptocurrency development and trading platform.</p>
+                </div>
+                
+                <div class="subsidiary">
+                    <h4>VC Data Centers, LLC</h4>
+                    <p>Build and operate data centers to serve as cloud infrastructure for enterprise customers.</p>
+                </div>
+                
+                <div class="subsidiary">
+                    <h4>The VIRT, LLC</h4>
+                    <p>Market proprietary cryptocurrency for mining and establish a platform for trading.</p>
+                </div>
+                
+                <div class="subsidiary">
+                    <h4>VC Energy, LLC</h4>
+                    <p>Generate and supply low-cost power for real estate projects and data centers.</p>
+                </div>
+            </div>
+            
+            <!-- Real Estate Division -->
+            <div class="division realestate">
+                <h3>🏠 Real Estate Division</h3>
+                
+                <div class="subsidiary">
+                    <h4>Uma Real Estate Investment, LLC</h4>
+                    <p>Land acquisitions for DHG businesses. Evaluates locations and develops land for subsidiary operations.</p>
+                </div>
+                
+                <div class="subsidiary">
+                    <h4>Villa Agape, LLC</h4>
+                    <p>Develop and build residences in a villa setting with assisting care of love for cancer patients and retirees.</p>
+                </div>
+                
+                <div class="subsidiary">
+                    <h4>Compassionate Care, LLC</h4>
+                    <p>Provide daily caring for residents at Villa Agape with on-site clinic and health professionals.</p>
+                </div>
+                
+                <div class="subsidiary">
+                    <h4>Pisces Resort, LLC</h4>
+                    <p>Resort with prefabricated cabins, spa, gym, swimming pool, and wellness amenities near Trinity River.</p>
+                </div>
+                
+                <div class="subsidiary">
+                    <h4>Venus Venue & Vineyard, LLC</h4>
+                    <p>Nature-inspired venue for weddings and events, plus vineyard for wine production and sales.</p>
+                </div>
+                
+                <div class="subsidiary">
+                    <h4>Pomodoro Restaurant, LLC</h4>
+                    <p>Award-winning Italian restaurant with luxury dining service and catering for events.</p>
+                </div>
+            </div>
+            
+            <!-- Trading Division -->
+            <div class="division trading">
+                <h3>🌐 Trading Division</h3>
+                
+                <div class="subsidiary">
+                    <h4>The Silk Road Trading, LLC</h4>
+                    <p>Worldwide sourcing and trading products with strong profit outlooks across international markets.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="org-chart">
+            <h3>Organization Structure</h3>
+            <div class="chart-container">
+                <svg width="100%" height="500" viewBox="0 0 1200 500">
+                    <!-- DHG Parent -->
+                    <rect x="450" y="20" width="300" height="60" rx="10" fill="#1e3a8a"/>
+                    <text x="600" y="55" text-anchor="middle" fill="#fff" font-weight="700" font-size="16">DOZIER HOLDINGS GROUP</text>
+                    
+                    <!-- Lines to divisions -->
+                    <line x1="600" y1="80" x2="600" y2="120" stroke="#3b82f6" stroke-width="3"/>
+                    <line x1="200" y1="120" x2="1000" y2="120" stroke="#3b82f6" stroke-width="3"/>
+                    <line x1="200" y1="120" x2="200" y2="150" stroke="#3b82f6" stroke-width="3"/>
+                    <line x1="600" y1="120" x2="600" y2="150" stroke="#22c55e" stroke-width="3"/>
+                    <line x1="1000" y1="120" x2="1000" y2="150" stroke="#f59e0b" stroke-width="3"/>
+                    
+                    <!-- Technology Division -->
+                    <rect x="50" y="150" width="300" height="40" rx="8" fill="#3b82f6"/>
+                    <text x="200" y="175" text-anchor="middle" fill="#fff" font-weight="600" font-size="14">TECHNOLOGY</text>
+                    
+                    <!-- Tech subsidiaries -->
+                    <rect x="20" y="210" width="140" height="50" rx="6" fill="#60a5fa" stroke="#fff" stroke-width="2"/>
+                    <text x="90" y="235" text-anchor="middle" fill="#fff" font-weight="600" font-size="11">NIL Portal Inc.</text>
+                    <text x="90" y="250" text-anchor="middle" fill="#fff" font-size="9">NEW</text>
+                    
+                    <rect x="170" y="210" width="140" height="50" rx="6" fill="#60a5fa" stroke="#fff" stroke-width="2"/>
+                    <text x="240" y="235" text-anchor="middle" fill="#fff" font-weight="600" font-size="11">Softmor Inc.</text>
+                    <text x="240" y="250" text-anchor="middle" fill="#fff" font-size="9">NEW</text>
+                    
+                    <rect x="20" y="270" width="140" height="40" rx="6" fill="rgba(59,130,246,0.5)"/>
+                    <text x="90" y="295" text-anchor="middle" fill="#fff" font-size="10">VC Technologies</text>
+                    
+                    <rect x="170" y="270" width="140" height="40" rx="6" fill="rgba(59,130,246,0.5)"/>
+                    <text x="240" y="295" text-anchor="middle" fill="#fff" font-size="10">VC Data Centers</text>
+                    
+                    <rect x="20" y="320" width="140" height="40" rx="6" fill="rgba(59,130,246,0.5)"/>
+                    <text x="90" y="345" text-anchor="middle" fill="#fff" font-size="10">The VIRT</text>
+                    
+                    <rect x="170" y="320" width="140" height="40" rx="6" fill="rgba(59,130,246,0.5)"/>
+                    <text x="240" y="345" text-anchor="middle" fill="#fff" font-size="10">VC Energy</text>
+                    
+                    <!-- Real Estate Division -->
+                    <rect x="450" y="150" width="300" height="40" rx="8" fill="#22c55e"/>
+                    <text x="600" y="175" text-anchor="middle" fill="#fff" font-weight="600" font-size="14">REAL ESTATE</text>
+                    
+                    <!-- RE subsidiaries -->
+                    <rect x="420" y="210" width="140" height="40" rx="6" fill="rgba(34,197,94,0.5)"/>
+                    <text x="490" y="235" text-anchor="middle" fill="#fff" font-size="10">Uma Real Estate</text>
+                    
+                    <rect x="570" y="210" width="140" height="40" rx="6" fill="rgba(34,197,94,0.5)"/>
+                    <text x="640" y="235" text-anchor="middle" fill="#fff" font-size="10">Villa Agape</text>
+                    
+                    <rect x="420" y="260" width="140" height="40" rx="6" fill="rgba(34,197,94,0.5)"/>
+                    <text x="490" y="285" text-anchor="middle" fill="#fff" font-size="10">Compassionate Care</text>
+                    
+                    <rect x="570" y="260" width="140" height="40" rx="6" fill="rgba(34,197,94,0.5)"/>
+                    <text x="640" y="285" text-anchor="middle" fill="#fff" font-size="10">Pisces Resort</text>
+                    
+                    <rect x="420" y="310" width="140" height="40" rx="6" fill="rgba(34,197,94,0.5)"/>
+                    <text x="490" y="335" text-anchor="middle" fill="#fff" font-size="10">Venus Venue</text>
+                    
+                    <rect x="570" y="310" width="140" height="40" rx="6" fill="rgba(34,197,94,0.5)"/>
+                    <text x="640" y="335" text-anchor="middle" fill="#fff" font-size="10">Pomodoro Restaurant</text>
+                    
+                    <!-- Trading Division -->
+                    <rect x="850" y="150" width="300" height="40" rx="8" fill="#f59e0b"/>
+                    <text x="1000" y="175" text-anchor="middle" fill="#fff" font-weight="600" font-size="14">TRADING</text>
+                    
+                    <rect x="920" y="210" width="160" height="40" rx="6" fill="rgba(245,158,11,0.5)"/>
+                    <text x="1000" y="235" text-anchor="middle" fill="#fff" font-size="10">Silk Road Trading</text>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 Dozier Holdings Group, LLC. All rights reserved.</p>
+            <p style="margin-top: 10px;">19039 Cloyanna Ln, Humble, TX 77346 | dozierholdingsgroup.com</p>
+        </div>
+    </div>
+</body>
+</html>
