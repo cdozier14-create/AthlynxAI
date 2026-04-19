@@ -382,15 +382,77 @@ export default function Home() {
     <div className="min-h-screen bg-[#1a3a8f] text-white">
       {/* ═══ INVESTOR BANNER — ABSOLUTE TOP ═══ */}
       <Link href="/investor-hub">
-        <div className="bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-400 text-black cursor-pointer hover:from-yellow-300 hover:to-yellow-300 transition-all">
-          <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
-            <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-            <span className="font-black text-xs sm:text-sm tracking-widest uppercase">ATHLYNX IS ACTIVELY SEEKING INVESTORS &amp; STRATEGIC PARTNERS</span>
-            <span className="hidden sm:flex items-center gap-1 text-xs font-bold bg-black/15 px-3 py-1 rounded-full">
-              <span className="w-1.5 h-1.5 bg-green-700 rounded-full animate-pulse"></span>
-              Pre-Seed Round · $130B Market
+        <div
+          className="relative overflow-hidden cursor-pointer group"
+          style={{
+            background: "linear-gradient(135deg, #060e24 0%, #0d2151 35%, #112d6b 65%, #060e24 100%)",
+            borderBottom: "1px solid rgba(99,179,237,0.2)",
+          }}
+        >
+          {/* Animated shimmer sweep */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: "linear-gradient(90deg, transparent 0%, rgba(99,179,237,0.08) 50%, transparent 100%)",
+              animation: "shimmer 4s ease-in-out infinite",
+            }}
+          />
+          {/* Top edge glow line */}
+          <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(99,179,237,0.6) 50%, transparent)" }} />
+          {/* Bottom edge glow line */}
+          <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(99,179,237,0.3) 50%, transparent)" }} />
+          <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-center gap-3 sm:gap-5 flex-wrap relative z-10">
+            {/* Pulsing live indicator */}
+            <span className="flex items-center gap-1.5 flex-shrink-0">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+              </span>
+              <span className="text-cyan-400 text-[9px] font-black tracking-[0.25em] uppercase">Open</span>
             </span>
-            <span className="font-black text-xs sm:text-sm border-b-2 border-black/40 hover:border-black transition-colors">VIEW INVESTOR DECK →</span>
+            {/* Divider */}
+            <span className="hidden sm:block w-px h-3.5 bg-blue-700/70" />
+            {/* Main message */}
+            <span
+              className="font-black text-xs sm:text-sm tracking-widest uppercase"
+              style={{
+                background: "linear-gradient(90deg, #cbd5e0 0%, #90cdf4 40%, #e2e8f0 70%, #90cdf4 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              ATHLYNX IS ACTIVELY SEEKING INVESTORS &amp; STRATEGIC PARTNERS
+            </span>
+            {/* Divider */}
+            <span className="hidden sm:block w-px h-3.5 bg-blue-700/70" />
+            {/* Market badge */}
+            <span
+              className="hidden sm:flex items-center gap-1.5 text-[10px] font-black tracking-widest px-3 py-1 rounded-full"
+              style={{
+                background: "rgba(12,37,99,0.8)",
+                border: "1px solid rgba(99,179,237,0.35)",
+                color: "#90cdf4",
+                backdropFilter: "blur(4px)",
+              }}
+            >
+              <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" style={{ boxShadow: "0 0 6px rgba(52,211,153,0.9)" }} />
+              PRE-SEED · $130B MARKET
+            </span>
+            {/* CTA arrow link */}
+            <span
+              className="font-black text-xs sm:text-sm tracking-widest uppercase group-hover:opacity-80 transition-opacity"
+              style={{
+                background: "linear-gradient(90deg, #63b3ed, #bee3f8)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                borderBottom: "1px solid rgba(99,179,237,0.5)",
+                paddingBottom: "1px",
+              }}
+            >
+              VIEW INVESTOR DECK →
+            </span>
           </div>
         </div>
       </Link>
