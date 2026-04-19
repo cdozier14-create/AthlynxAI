@@ -6,25 +6,25 @@ import { useLocation } from "wouter";
 // InstallAppModal replaced by slim PWAInstallBanner auto-shown at bottom
 
 const APPS = [
-  { id: "nil-portal", label: "NIL Portal", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/hwOQVLfuCOMOEEOs.jpeg", badge: "LIVE", href: "/nil-portal", desc: "Manage your NIL deals" },
-  { id: "messenger", label: "Messenger", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/QqEbtsSkNKilkhky.jpeg", badge: "LIVE", href: "/messenger", desc: "Connect with coaches & brands" },
-  { id: "diamond-grind", label: "Diamond Grind", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/zlPDaytGyNDgvgIj.png", badge: "NEW", href: "/diamond-grind", desc: "Baseball training platform" },
-  { id: "warriors-playbook", label: "Warriors Playbook", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/HghyDvusmaqVxKXs.png", badge: "HOT", href: "/warriors-playbook", desc: "Plays, film & strategy" },
-  { id: "transfer-portal", label: "Transfer Portal", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/zXVECIAqcyZDAOuV.png", badge: "LIVE", href: "/transfer-portal", desc: "Find your next school" },
-  { id: "nil-vault", label: "NIL Vault", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/aDzQEREXtGvMmnFc.png", badge: "ELITE", href: "/nil-vault", desc: "Secure your contracts" },
-  { id: "ai-sales", label: "AI Sales", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/aZXZLwryoTRrDQBs.png", badge: "AI", href: "/ai-sales", desc: "Close brand deals with AI" },
-  { id: "faith", label: "Faith", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/mlASPvSCUQZpELyh.png", badge: "", href: "/faith", desc: "Daily athlete devotionals" },
-  { id: "ai-recruiter", label: "AI Recruiter", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/jmJopPCZNYcSzojv.png", badge: "AI", href: "/ai-recruiter", desc: "Optimize your recruiting" },
-  { id: "ai-content", label: "AI Content", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/ZIXWdkuFjiAnPjQj.png", badge: "BLEND", href: "/ai-content", desc: "Create viral content" },
-  { id: "infrastructure", label: "Infrastructure", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/XQoWBSZFveYEShpv.png", badge: "TECH", href: "/infrastructure", desc: "Data centers & AI tech" },
-  { id: "gridiron-nexus", label: "Gridiron Nexus", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/HghyDvusmaqVxKXs.png", badge: "FOOTBALL", href: "/gridiron-nexus", desc: "Elite football platform" },
-  { id: "pitch-pulse", label: "Pitch Pulse", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/CVjahruZfJTZcuBW.png", badge: "SOCCER", href: "/pitch-pulse", desc: "Global soccer ecosystem" },
-  { id: "court-kings", label: "Court Kings", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/IYSXsjNLtHxVaazj.png", badge: "HOOPS", href: "/court-kings", desc: "Basketball AAU & NIL" },
-  { id: "reel-masters", label: "Reel Masters", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/xAyZWiErhsjFhyVP.png", badge: "FISHING", href: "/reel-masters", desc: "Ultimate fishing platform" },
-  { id: "marketplace", label: "Marketplace", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/lwxugmjkXJoyYfVC.png", badge: "SHOP", href: "/marketplace", desc: "Athlete gear & deals" },
-  { id: "athlete-dashboard", label: "My Dashboard", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/GxeIWIdQkpRYcHWd.png", badge: "PERSONAL", href: "/athlete-dashboard", desc: "Your athlete command center" }, // unique — kept original
-  { id: "community-feedback", label: "Community", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/lcQxjnmKEGqxIlhY.png", badge: "VOICE", href: "/community-feedback", desc: "Shape the platform" },
-  { id: "mobile-app", label: "Mobile App", icon: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/EuWYpgmSWLKKpvNR.png", badge: "BETA", href: "/mobile-app", desc: "ATHLYNX in your pocket" },
+  { id: "nil-portal", label: "NIL Portal™", icon: "/images/logos/nil-portal-logo.png", badge: "LIVE", href: "/nil-portal", desc: "Manage your NIL deals" },
+  { id: "messenger", label: "Messenger™", icon: "/images/logos/nil-messenger-logo.png", badge: "LIVE", href: "/messenger", desc: "Connect with coaches & brands" },
+  { id: "diamond-grind", label: "Diamond Grind™", icon: "/diamond-grind-baseball-icon.png", badge: "NEW", href: "/diamond-grind", desc: "Baseball training platform" },
+  { id: "warriors-playbook", label: "Warriors Playbook™", icon: "/warriors-playbook-icon.png", badge: "HOT", href: "/warriors-playbook", desc: "Plays, film & strategy" },
+  { id: "transfer-portal", label: "Transfer Portal™", icon: "/transfer-portal-icon.png", badge: "LIVE", href: "/transfer-portal", desc: "Find your next school" },
+  { id: "nil-vault", label: "NIL Vault™", icon: "/nil-vault-icon.png", badge: "ELITE", href: "/nil-vault", desc: "Secure your contracts" },
+  { id: "ai-sales", label: "AI Sales™", icon: "/ai-sales.png", badge: "AI", href: "/ai-sales", desc: "Close brand deals with AI" },
+  { id: "faith", label: "Faith™", icon: "/faith-icon.png", badge: "FAITH", href: "/faith", desc: "Daily athlete devotionals" },
+  { id: "ai-recruiter", label: "AI Recruiter™", icon: "/ai-recruiter.png", badge: "AI", href: "/ai-recruiter", desc: "Optimize your recruiting" },
+  { id: "ai-content", label: "AI Content™", icon: "/ai-content.png", badge: "BLEND", href: "/ai-content", desc: "Create viral content" },
+  { id: "infrastructure", label: "Infrastructure™", icon: "/economic-vision.png", badge: "TECH", href: "/infrastructure", desc: "Data centers & AI tech" },
+  { id: "gridiron-nexus", label: "Gridiron Nexus™", icon: "/gridiron-nexus-icon.png", badge: "FOOTBALL", href: "/gridiron-nexus", desc: "Elite football platform" },
+  { id: "pitch-pulse", label: "Pitch Pulse™", icon: "/pitch-pulse-icon.png", badge: "SOCCER", href: "/pitch-pulse", desc: "Global soccer ecosystem" },
+  { id: "court-kings", label: "Court Kings™", icon: "/court-kings-icon.png", badge: "HOOPS", href: "/court-kings", desc: "Basketball AAU & NIL" },
+  { id: "reel-masters", label: "Reel Masters™", icon: "/reel-masters-icon.png", badge: "FISHING", href: "/reel-masters", desc: "Ultimate fishing platform" },
+  { id: "marketplace", label: "Marketplace™", icon: "/athlynx-app-icon.png", badge: "SHOP", href: "/marketplace", desc: "Athlete gear & deals" },
+  { id: "athlete-dashboard", label: "My Dashboard™", icon: "/professional-athlete-dashboard.png", badge: "PERSONAL", href: "/athlete-dashboard", desc: "Your athlete command center" },
+  { id: "community-feedback", label: "Community™", icon: "/fuelbots-icon.png", badge: "VOICE", href: "/community-feedback", desc: "Shape the platform" },
+  { id: "mobile-app", label: "Mobile App™", icon: "/images/logos/mobile-app-icon.png", badge: "BETA", href: "/mobile-app", desc: "ATHLYNX in your pocket" },
 ];
 
 const BADGE_COLORS: Record<string, string> = {
@@ -209,7 +209,7 @@ function useCountdown(targetDate: Date) {
   return timeLeft;
 }
 
-const ATHLYNX_LOGO = "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/EuWYpgmSWLKKpvNR.png";
+const ATHLYNX_LOGO = "/images/logos/athlynx-main-logo.png";
 
 function VideoCard({ video }: { video: { file: string; title: string; badge: string } }) {
   const [playing, setPlaying] = useState(false);
@@ -367,7 +367,7 @@ export default function Home() {
       <header className="bg-[#1a3a8f] border-b border-blue-900 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
           <div className="flex items-center gap-3">
-            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/EuWYpgmSWLKKpvNR.png" alt="ATHLYNX" className="w-10 h-10 rounded-lg object-contain flex-shrink-0" style={{ minWidth: '40px', minHeight: '40px' }} />
+            <img src="/images/logos/athlynx-main-logo.png" alt="ATHLYNX" className="w-10 h-10 rounded-lg object-contain flex-shrink-0" style={{ minWidth: '40px', minHeight: '40px' }} />
             <div>
               <div className="text-white font-black text-lg leading-none tracking-wide">ATHLYNX</div>
               <div className="text-blue-400 text-[9px] tracking-widest">THE ATHLETE'S PLAYBOOK</div>
@@ -442,13 +442,19 @@ export default function Home() {
           muted
           loop
           playsInline
-          poster="https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/EuWYpgmSWLKKpvNR.png"
+          poster="/athlynx-sports-brand.png"
           onError={(e) => { (e.target as HTMLVideoElement).style.display = 'none'; }}
         >
           <source src={CRAB_LOGO_VIDEO} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-t from-[#060e24] via-[#0d1b3e]/40 to-transparent pointer-events-none"></div>
-        <div className="relative z-10 min-h-[320px] md:min-h-[480px] flex flex-col items-center justify-end pb-10 px-4 text-center">
+        <div className="relative z-10 min-h-[320px] md:min-h-[480px] flex flex-col items-center justify-between pt-6 pb-10 px-4 text-center">
+          <img
+            src="/athlynx-sports-brand.png"
+            alt="ATHLYNX™"
+            className="w-24 h-24 rounded-2xl shadow-2xl object-contain drop-shadow-[0_0_20px_rgba(0,194,255,0.8)]"
+          />
+          <div>
           <div className="inline-flex items-center gap-2 bg-yellow-500/20 border border-yellow-500 text-yellow-300 text-xs font-black px-4 py-1.5 rounded-full mb-4 tracking-widest">
             <span className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></span>
             OFFICIAL PLATFORM DEMO
@@ -464,6 +470,7 @@ export default function Home() {
             <Link href="/demo" className="inline-block bg-yellow-500 hover:bg-yellow-400 text-black font-black text-lg px-8 py-3 rounded-xl transition-all shadow-xl hover:scale-105">
               HOW IT WORKS
             </Link>
+          </div>
           </div>
         </div>
       </section>
@@ -486,16 +493,18 @@ export default function Home() {
       <section className="bg-[#1a3a8f] border-y border-blue-900 py-6">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/VamiogmlYgmVpcGs.png" alt="Dozier Holdings Group" className="w-16 h-16 rounded-xl object-cover" />
+            <a href="https://dozierholdingsgroup.com" target="_blank" rel="noopener noreferrer">
+              <img src="/images/logos/dhg-logo.png" alt="Dozier Holdings Group" className="w-16 h-16 rounded-xl object-cover hover:opacity-85 transition-opacity cursor-pointer" />
+            </a>
             <div>
               <div className="text-blue-400 text-xs uppercase tracking-widest">Heavyweight Champion</div>
-              <div className="text-white font-black text-xl">DOZIER HOLDINGS GROUP</div>
+              <a href="https://dozierholdingsgroup.com" target="_blank" rel="noopener noreferrer" className="text-white font-black text-xl hover:text-blue-200 transition-colors block">DOZIER HOLDINGS GROUP</a>
               <div className="text-blue-300 text-sm">The empire behind the platform</div>
             </div>
           </div>
-          <Link href="/dhg" className="text-sm border border-blue-600 text-blue-300 hover:bg-blue-800 px-4 py-2 rounded-lg transition-colors">
-            View DHG Corporate →
-          </Link>
+          <a href="https://dozierholdingsgroup.com" target="_blank" rel="noopener noreferrer" className="text-sm border border-blue-600 text-blue-300 hover:bg-blue-800 px-4 py-2 rounded-lg transition-colors">
+            Visit Dozier Holdings Group →
+          </a>
         </div>
       </section>
 
@@ -756,7 +765,7 @@ export default function Home() {
             <div className="flex flex-col items-center gap-4">
               <div className="relative">
                 <img
-                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/XpAwjOuvLANXFWwc.png"
+                  src="/images/logos/mobile-app-icon.png"
                   alt="ATHLYNX iOS App"
                   className="w-28 h-28 rounded-3xl shadow-2xl shadow-blue-900/60 object-contain border-2 border-blue-700"
                 />
@@ -784,7 +793,7 @@ export default function Home() {
             <div className="flex flex-col items-center gap-4">
               <div className="relative">
                 <img
-                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/KanIwSJXjoVfbGgB.png"
+                  src="/images/logos/mobile-app-icon.png"
                   alt="ATHLYNX Android App"
                   className="w-28 h-28 rounded-3xl shadow-2xl shadow-blue-900/60 object-contain border-2 border-blue-700"
                 />
@@ -830,7 +839,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663028706780/EuWYpgmSWLKKpvNR.png" alt="ATHLYNX" className="w-8 h-8 rounded-lg" />
+              <img src="/images/logos/athlynx-main-logo.png" alt="ATHLYNX" className="w-8 h-8 rounded-lg" />
               <div>
                 <div className="text-white font-black">ATHLYNX</div>
                 <div className="text-blue-400 text-xs">A Dozier Holdings Group Company</div>
@@ -861,7 +870,7 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-6 text-center text-blue-600 text-xs">
-            © 2026 Dozier Holdings Group. All Rights Reserved. Dreams Do Come True 2026.
+            © 2026 Dozier Holdings Group™. All Rights Reserved. ATHLYNX™ | The Athlete's Playbook™ | NIL Portal™ | Diamond Grind™ | Gridiron Nexus™ | Pitch Pulse™ | Court Kings™ | Reel Masters™ | Warriors Playbook™ | NIL Vault™ | Transfer Portal™ | Fuel Bots™ are trademarks of Dozier Holdings Group. Dreams Do Come True 2026.
           </div>
         </div>
       </footer>

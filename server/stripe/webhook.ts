@@ -1,5 +1,6 @@
 import Stripe from "stripe";
-import express, { type Application, type Request, type Response } from "express";
+import express from "express";
+import type { Application, Request, Response } from "express";
 import { eq } from "drizzle-orm";
 import { getDb } from "../db";
 import { users } from "../../drizzle/schema";
