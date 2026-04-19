@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1776296800134,
+      "tag": "0000_clean_thunderbolt",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1776299568818,
+      "tag": "0001_open_princess_powerful",
+      "breakpoints": true
+    }
+  ]
+}

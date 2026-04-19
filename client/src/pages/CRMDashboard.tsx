@@ -40,7 +40,6 @@ interface CRMStats {
 
 export default function CRMDashboard() {
   const [accessCode, setAccessCode] = useState("");
-  const [userId, setUserId] = useState<number | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [partnerName, setPartnerName] = useState("");
   const [signups, setSignups] = useState<SignupEntry[]>([]);
@@ -49,10 +48,10 @@ export default function CRMDashboard() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const lastSignupCount = useRef(0);
 
-  // Validate access - using a simple code-to-userId mapping for now
+  // Validate access
   const validateAccess = trpc.crm.validateAccess.useQuery(
-    { userId: userId || 0 },
-    { enabled: userId !== null && userId > 0 }
+    { accessCode },
+    { enabled: false }
   );
 
   // Get stats
@@ -63,7 +62,7 @@ export default function CRMDashboard() {
 
   // Get signups
   const signupsQuery = trpc.crm.signups.useQuery(
-    { limit: 100, userId: userId || undefined },
+    { limit: 100 },
     { 
       enabled: isAuthenticated,
       refetchInterval: autoRefresh ? 5000 : false,
@@ -123,26 +122,14 @@ export default function CRMDashboard() {
       return;
     }
     
-    // Parse accessCode as userId (for simplicity, accessCode is the userId)
-    const parsedUserId = parseInt(accessCode, 10);
-    if (isNaN(parsedUserId)) {
-      toast.error("Invalid access code format");
-      return;
+    const result = await validateAccess.refetch();
+    if (result.data?.valid) {
+      setIsAuthenticated(true);
+      setPartnerName(result.data.partner?.name || "Partner");
+      toast.success(`Welcome, ${result.data.partner?.name}!`);
+    } else {
+      toast.error("Invalid access code");
     }
-    
-    setUserId(parsedUserId);
-    // The query will auto-run when userId is set
-    setTimeout(async () => {
-      const result = await validateAccess.refetch();
-      if (result.data?.valid) {
-        setIsAuthenticated(true);
-        setPartnerName(result.data.partner?.partnerName || "Partner");
-        toast.success(`Welcome, ${result.data.partner?.partnerName}!`);
-      } else {
-        toast.error("Invalid access code");
-        setUserId(null);
-      }
-    }, 100);
   };
 
   const exportToCSV = () => {

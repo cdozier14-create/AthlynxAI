@@ -1,24 +1,92 @@
 {
-  "name": "ATHLYNX - The Athlete's Playbook",
+  "name": "ATHLYNX – The Athlete's Playbook",
   "short_name": "ATHLYNX",
-  "description": "The Future of Athlete Success. Complete NIL platform with 10 integrated apps for college athletes.",
+  "description": "The complete athlete platform for NIL deals, transfer portal, recruiting, social networking, messaging, AI tools, and career management. One platform. Every tool. Unlimited potential.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a1628",
-  "theme_color": "#1e40af",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
+  "background_color": "#0A0F1E",
+  "theme_color": "#00D4FF",
+  "scope": "/",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["sports", "social", "business", "education", "lifestyle"],
+  "iarc_rating_id": "",
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.athlynx.app",
+      "id": "com.athlynx.app"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/app/athlynx/id0000000000"
+    }
+  ],
   "icons": [
     {
-      "src": "/images/logos/mobile-app-icon.png",
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "https://d2xsxph8kpxj0f.cloudfront.net/310419663028706780/CwaxehSqJgGxbN8KdgWNph/icon-192_52ef996c.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/images/logos/mobile-app-icon.png",
+      "src": "https://d2xsxph8kpxj0f.cloudfront.net/310419663028706780/CwaxehSqJgGxbN8KdgWNph/icon-512_816b3f83.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://d2xsxph8kpxj0f.cloudfront.net/310419663028706780/CwaxehSqJgGxbN8KdgWNph/athlynx-og-social_9f8e7d6c.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "ATHLYNX – The Athlete's Playbook"
+    },
+    {
+      "src": "https://d2xsxph8kpxj0f.cloudfront.net/310419663028706780/CwaxehSqJgGxbN8KdgWNph/icon-512_816b3f83.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "ATHLYNX App Icon"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "NIL Portal",
+      "short_name": "NIL",
+      "description": "Manage your NIL deals and brand partnerships",
+      "url": "/nil-portal",
+      "icons": [{ "src": "https://d2xsxph8kpxj0f.cloudfront.net/310419663028706780/CwaxehSqJgGxbN8KdgWNph/icon-192_52ef996c.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Messenger",
+      "short_name": "Chat",
+      "description": "Secure athlete messaging",
+      "url": "/messenger",
+      "icons": [{ "src": "https://d2xsxph8kpxj0f.cloudfront.net/310419663028706780/CwaxehSqJgGxbN8KdgWNph/icon-192_52ef996c.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Transfer Portal",
+      "short_name": "Transfer",
+      "description": "Navigate the transfer portal",
+      "url": "/transfer-portal",
+      "icons": [{ "src": "https://d2xsxph8kpxj0f.cloudfront.net/310419663028706780/CwaxehSqJgGxbN8KdgWNph/icon-192_52ef996c.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Feed",
+      "short_name": "Feed",
+      "description": "Your athlete social feed",
+      "url": "/feed",
+      "icons": [{ "src": "https://d2xsxph8kpxj0f.cloudfront.net/310419663028706780/CwaxehSqJgGxbN8KdgWNph/icon-192_52ef996c.png", "sizes": "192x192" }]
     }
   ]
 }

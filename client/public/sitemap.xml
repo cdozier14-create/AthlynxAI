@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Pages (Highest Priority) -->
+  <url><loc>https://athlynxapp.vip/</loc><lastmod>2026-04-15</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://athlynxapp.vip/signup</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://athlynxapp.vip/signin</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/pricing</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+
+  <!-- NIL & Transfer Portal (Highest SEO Value) -->
+  <url><loc>https://athlynxapp.vip/nil-marketplace</loc><lastmod>2026-04-15</lastmod><changefreq>daily</changefreq><priority>0.95</priority></url>
+  <url><loc>https://athlynxapp.vip/nil-calculator</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://athlynxapp.vip/nil-portal</loc><lastmod>2026-04-15</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://athlynxapp.vip/nil-vault</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/transfer-portal</loc><lastmod>2026-04-15</lastmod><changefreq>daily</changefreq><priority>0.95</priority></url>
+  <url><loc>https://athlynxapp.vip/transfer-intelligence</loc><lastmod>2026-04-15</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://athlynxapp.vip/transfer-portal-fos</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/signing-day</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+
+  <!-- Athlete Tools (High Priority) -->
+  <url><loc>https://athlynxapp.vip/athlete-dashboard</loc><lastmod>2026-04-15</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://athlynxapp.vip/athlete-playbook</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://athlynxapp.vip/athlete-website-builder</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/playbook</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/training</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/contracts</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- AI & Technology -->
+  <url><loc>https://athlynxapp.vip/ai-training-bot</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://athlynxapp.vip/ai-recruiter</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://athlynxapp.vip/ai-content</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/ai-sales</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/robot-companions</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/fuel-bots</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/team-bots</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+
+  <!-- Wizards (Professional Services) -->
+  <url><loc>https://athlynxapp.vip/wizards</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/wizards/agent</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/wizards/financial</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/wizards/lawyer</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/wizards/scout</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/wizards/career</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/wizards/life</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/wizards/scholarship</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/wizards/transfer</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/wizard-hub</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- Sports Pages (High SEO Value - Sport-Specific Keywords) -->
+  <url><loc>https://athlynxapp.vip/football</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/basketball</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/baseball</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/soccer</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://athlynxapp.vip/track</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/swimming</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/volleyball</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/wrestling</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/golf</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/tennis</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/hockey</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- Sport-Branded Pages -->
+  <url><loc>https://athlynxapp.vip/gridiron-nexus</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/court-kings</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/diamond-grind</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/pitch-pulse</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/track-elite</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/swim-surge</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/net-setters</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/mat-warriors</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/fairway-elite</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/racket-kings</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/ice-breakers</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/reel-masters</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+
+  <!-- Communication & Social -->
+  <url><loc>https://athlynxapp.vip/feed</loc><lastmod>2026-04-15</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/messenger</loc><lastmod>2026-04-15</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/comms-hub</loc><lastmod>2026-04-15</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/social-hub</loc><lastmod>2026-04-15</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/media-showcase</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/studio</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+
+  <!-- Health & Wellness -->
+  <url><loc>https://athlynxapp.vip/health</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/wellness</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/medical</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/mindset</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/gym</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+
+  <!-- Corporate & Company Pages -->
+  <url><loc>https://athlynxapp.vip/founders</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/dhg</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/softmor</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/capabilities</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/team</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/careers</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/contact</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/partners</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/investor-hub</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Marketplace & Store -->
+  <url><loc>https://athlynxapp.vip/marketplace</loc><lastmod>2026-04-15</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://athlynxapp.vip/store</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/shop</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/app-store</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+
+  <!-- Legal Pages -->
+  <url><loc>https://athlynxapp.vip/privacy-policy</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://athlynxapp.vip/terms-of-service</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://athlynxapp.vip/hipaa</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://athlynxapp.vip/legal-compliance</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://athlynxapp.vip/legal-hub</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+
+  <!-- Military & Veterans -->
+  <url><loc>https://athlynxapp.vip/veterans</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/military-division</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/operation-warrior-pipeline</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Special Pages -->
+  <url><loc>https://athlynxapp.vip/faith</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://athlynxapp.vip/music</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://athlynxapp.vip/hunting</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://athlynxapp.vip/fishing</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://athlynxapp.vip/robotics</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/bitcoin-mining</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://athlynxapp.vip/infrastructure</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- Remaining Pages -->
+  <url><loc>https://athlynxapp.vip/community-feedback</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://athlynxapp.vip/download</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/mobile-app</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/success</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/journey</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://athlynxapp.vip/school</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://athlynxapp.vip/quick-links</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://athlynxapp.vip/notifications</loc><lastmod>2026-04-15</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://athlynxapp.vip/billing</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://athlynxapp.vip/early-access</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/warriors-playbook</loc><lastmod>2026-04-15</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://athlynxapp.vip/white-label</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://athlynxapp.vip/serenity-memorial</loc><lastmod>2026-04-15</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+</urlset>
