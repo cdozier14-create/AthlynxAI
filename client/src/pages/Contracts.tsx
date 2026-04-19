@@ -107,7 +107,7 @@ export default function Contracts() {
           </h1>
           <p className="text-xl text-slate-300 mb-8">
             Professional, legally-reviewed contract templates for NIL deals, brand partnerships, 
-            and athlete representation. Built for athlynxapp.vip, transferportal.ai, and the entire DHG ecosystem.
+            and athlete representation. Built for athlynx.ai, transferportal.ai, and the entire DHG ecosystem.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {features.map((feature) => (
@@ -157,7 +157,7 @@ export default function Contracts() {
           <p className="text-slate-400 text-center mb-12">Access contracts from any of our domains</p>
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { domain: "athlynxapp.vip", desc: "Main Platform", color: "from-blue-500 to-cyan-500" },
+              { domain: "athlynx.ai", desc: "Main Platform", color: "from-blue-500 to-cyan-500" },
               { domain: "athlynx.io", desc: "Developer Portal", color: "from-purple-500 to-pink-500" },
               { domain: "athlynx.net", desc: "Network Hub", color: "from-green-500 to-emerald-500" },
               { domain: "transferportal.ai", desc: "Transfer Portal", color: "from-amber-500 to-orange-500" },
@@ -200,7 +200,7 @@ export default function Contracts() {
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-slate-400 text-sm">© 2026 Dozier Holdings Group, LLC. All rights reserved.</p>
           <p className="text-slate-500 text-xs mt-2">
-            athlynxapp.vip • athlynx.io • athlynx.net • transferportal.ai
+            athlynx.ai • athlynx.io • athlynx.net • transferportal.ai
           </p>
         </div>
       </footer>

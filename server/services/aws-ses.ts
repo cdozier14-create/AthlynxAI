@@ -102,12 +102,12 @@ export async function sendWelcomeEmail(to: string, name: string): Promise<boolea
   </table>
   <table width="100%" cellpadding="0" cellspacing="0">
     <tr><td align="center">
-      <a href="https://athlynxapp.vip" style="display:inline-block;background:linear-gradient(135deg,#0066ff,#00c2ff);color:#fff;font-weight:900;font-size:16px;padding:16px 40px;border-radius:50px;text-decoration:none;letter-spacing:1px;">START YOUR JOURNEY →</a>
+      <a href="https://athlynx.ai" style="display:inline-block;background:linear-gradient(135deg,#0066ff,#00c2ff);color:#fff;font-weight:900;font-size:16px;padding:16px 40px;border-radius:50px;text-decoration:none;letter-spacing:1px;">START YOUR JOURNEY →</a>
     </td></tr>
   </table>
 </td></tr>
 <tr><td style="background:#060d1f;padding:24px;text-align:center;border-top:1px solid #1e3a6e;">
-  <p style="color:#475569;font-size:12px;margin:0;">A Dozier Holdings Group Company · athlynxapp.vip</p>
+  <p style="color:#475569;font-size:12px;margin:0;">A Dozier Holdings Group Company · athlynx.ai</p>
   <p style="color:#334155;font-size:11px;margin:8px 0 0;">Questions? <a href="mailto:cdozier@dozierholdingsgroup.com" style="color:#00c2ff;">cdozier@dozierholdingsgroup.com</a></p>
 </td></tr>
 </table>
@@ -120,7 +120,7 @@ export async function sendWelcomeEmail(to: string, name: string): Promise<boolea
     to,
     subject: "Welcome to ATHLYNX — Your 7-Day Free Trial Has Started 🏆",
     html,
-    text: `Welcome to ATHLYNX, ${name}! Your 7-day free trial has started. Visit https://athlynxapp.vip to get started.`,
+    text: `Welcome to ATHLYNX, ${name}! Your 7-day free trial has started. Visit https://athlynx.ai to get started.`,
   });
 }
 
@@ -222,7 +222,7 @@ export async function sendTrialExpiryEmail(to: string, name: string): Promise<bo
   <p style="color:#94a3b8;font-size:15px;line-height:1.6;margin:0 0 28px;">Don't lose access to LYNX AI, NIL deals, recruiting tools, and more. Upgrade now to keep your momentum going.</p>
   <table width="100%" cellpadding="0" cellspacing="0">
     <tr><td align="center">
-      <a href="https://athlynxapp.vip/pricing" style="display:inline-block;background:linear-gradient(135deg,#0066ff,#00c2ff);color:#fff;font-weight:900;font-size:15px;padding:14px 36px;border-radius:50px;text-decoration:none;">UPGRADE NOW →</a>
+      <a href="https://athlynx.ai/pricing" style="display:inline-block;background:linear-gradient(135deg,#0066ff,#00c2ff);color:#fff;font-weight:900;font-size:15px;padding:14px 36px;border-radius:50px;text-decoration:none;">UPGRADE NOW →</a>
     </td></tr>
   </table>
 </td></tr>
@@ -236,7 +236,7 @@ export async function sendTrialExpiryEmail(to: string, name: string): Promise<bo
     to,
     subject: `${name}, your ATHLYNX trial ends tomorrow — don't lose access`,
     html,
-    text: `${name}, your ATHLYNX trial ends tomorrow. Upgrade at https://athlynxapp.vip/pricing`,
+    text: `${name}, your ATHLYNX trial ends tomorrow. Upgrade at https://athlynx.ai/pricing`,
   });
 }
 
@@ -278,11 +278,11 @@ export async function sendOwnerNewUserAlert(opts: {
     <tr style="background:#0a1628;"><td style="padding:12px 16px;"><span style="color:#94a3b8;font-size:12px;display:block;margin-bottom:2px;">TRIAL ENDS</span><span style="color:#f59e0b;font-size:15px;font-weight:bold;">${opts.trialEndsAt}</span></td></tr>
   </table>
   <div style="margin-top:24px;text-align:center;">
-    <a href="https://athlynxapp.vip/admin" style="display:inline-block;background:linear-gradient(135deg,#0066ff,#00c2ff);color:#fff;font-weight:900;font-size:14px;padding:12px 32px;border-radius:50px;text-decoration:none;">VIEW ADMIN DASHBOARD</a>
+    <a href="https://athlynx.ai/admin" style="display:inline-block;background:linear-gradient(135deg,#0066ff,#00c2ff);color:#fff;font-weight:900;font-size:14px;padding:12px 32px;border-radius:50px;text-decoration:none;">VIEW ADMIN DASHBOARD</a>
   </div>
 </td></tr>
 <tr><td style="background:#060d1f;padding:20px;text-align:center;border-top:1px solid #1e3a6e;">
-  <p style="color:#475569;font-size:12px;margin:0;">ATHLYNX &middot; A Dozier Holdings Group Company &middot; athlynxapp.vip</p>
+  <p style="color:#475569;font-size:12px;margin:0;">ATHLYNX &middot; A Dozier Holdings Group Company &middot; athlynx.ai</p>
 </td></tr>
 </table>
 </td></tr>
@@ -294,7 +294,7 @@ export async function sendOwnerNewUserAlert(opts: {
       to,
       subject: `\uD83C\uDFC6 New ATHLYNX Signup: ${opts.name} (${opts.email})`,
       html,
-      text: `New ATHLYNX signup!\nName: ${opts.name}\nEmail: ${opts.email}\nLogin: ${opts.loginMethod}\nSigned Up: ${opts.signedUpAt} CST\nTrial Ends: ${opts.trialEndsAt}\n\nView dashboard: https://athlynxapp.vip/admin`,
+      text: `New ATHLYNX signup!\nName: ${opts.name}\nEmail: ${opts.email}\nLogin: ${opts.loginMethod}\nSigned Up: ${opts.signedUpAt} CST\nTrial Ends: ${opts.trialEndsAt}\n\nView dashboard: https://athlynx.ai/admin`,
     }))
   );
   return results.some(r => r);
@@ -314,7 +314,7 @@ export async function sendSubscriptionExpiryEmail(opts: {
   expiresAt: Date;
 }): Promise<boolean> {
   const isExpired = opts.emailType === "expired";
-  const renewUrl = "https://athlynxapp.vip/billing";
+  const renewUrl = "https://athlynx.ai/billing";
   const formattedDate = opts.expiresAt.toLocaleDateString("en-US", {
     weekday: "long", year: "numeric", month: "long", day: "numeric",
   });

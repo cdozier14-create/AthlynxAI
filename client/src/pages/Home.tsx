@@ -680,7 +680,7 @@ export default function Home() {
               { label: "NIL Portal", url: "https://nilportals.com", tag: "LIVE", color: "border-green-600 text-green-400", tagColor: "bg-green-700" },
               { label: "NIL Portal AI", url: "https://nilportal.ai", tag: "AI", color: "border-cyan-600 text-cyan-400", tagColor: "bg-cyan-700" },
               { label: "Transfer Portal", url: "https://transferportal.ai", tag: "LIVE", color: "border-green-600 text-green-400", tagColor: "bg-green-700" },
-              { label: "ATHLYNX App", url: "https://athlynxapp.vip", tag: "VIP", color: "border-purple-600 text-purple-400", tagColor: "bg-purple-700" },
+              { label: "ATHLYNX App", url: "https://athlynx.ai", tag: "VIP", color: "border-purple-600 text-purple-400", tagColor: "bg-purple-700" },
               { label: "ATHLYNX Pro", url: "https://athlynx.pro", tag: "PRO", color: "border-blue-500 text-blue-300", tagColor: "bg-blue-700" },
               { label: "ATHLYNX Net", url: "https://athlynx.net", tag: "NET", color: "border-blue-500 text-blue-300", tagColor: "bg-blue-700" },
               { label: "ATHLYNX IO", url: "https://athlynx.io", tag: "IO", color: "border-blue-500 text-blue-300", tagColor: "bg-blue-700" },
@@ -698,7 +698,7 @@ export default function Home() {
                     <span className="text-blue-600 group-hover:text-blue-400 text-xs transition-colors">→</span>
                   </div>
                   <div className={`font-bold text-sm leading-tight ${site.color.split(' ')[1]}`}>{site.label}</div>
-                  <div className="text-blue-600 text-[10px] truncate">athlynxapp.vip{site.url}</div>
+                  <div className="text-blue-600 text-[10px] truncate">athlynx.ai{site.url}</div>
                 </Link>
               ) : (
                 <a

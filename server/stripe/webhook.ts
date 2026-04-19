@@ -45,12 +45,12 @@ async function sendPaymentConfirmationEmail(opts: {
   </table>
   <table width="100%" cellpadding="0" cellspacing="0">
     <tr><td align="center">
-      <a href="https://athlynxapp.vip/feed" style="display:inline-block;background:linear-gradient(135deg,#0066ff,#00c2ff);color:#fff;font-weight:900;font-size:15px;padding:14px 36px;border-radius:50px;text-decoration:none;">GO TO DASHBOARD →</a>
+      <a href="https://athlynx.ai/feed" style="display:inline-block;background:linear-gradient(135deg,#0066ff,#00c2ff);color:#fff;font-weight:900;font-size:15px;padding:14px 36px;border-radius:50px;text-decoration:none;">GO TO DASHBOARD →</a>
     </td></tr>
   </table>
 </td></tr>
 <tr><td style="background:#060d1f;padding:20px;text-align:center;border-top:1px solid #1e3a6e;">
-  <p style="color:#475569;font-size:12px;margin:0;">A Dozier Holdings Group Company · athlynxapp.vip</p>
+  <p style="color:#475569;font-size:12px;margin:0;">A Dozier Holdings Group Company · athlynx.ai</p>
 </td></tr>
 </table>
 </td></tr>
@@ -61,7 +61,7 @@ async function sendPaymentConfirmationEmail(opts: {
     to: opts.to,
     subject: `Payment Confirmed — Your ATHLYNX ${opts.plan} is Active 🏆`,
     html,
-    text: `Payment confirmed! Your ATHLYNX ${opts.plan} is now active. Amount: $${opts.amount.toFixed(2)}. Order ID: ${opts.sessionId}. Visit https://athlynxapp.vip`,
+    text: `Payment confirmed! Your ATHLYNX ${opts.plan} is now active. Amount: $${opts.amount.toFixed(2)}. Order ID: ${opts.sessionId}. Visit https://athlynx.ai`,
   });
 }
 

@@ -20,7 +20,7 @@ Your Founder Access Code: ${FOUNDER_CODE}
 (Lifetime access · Never expires · Founder privileges)
 
 PLATFORM IS LIVE AT:
-→ https://athlynxapp.vip
+→ https://athlynx.ai
 → https://athlynx.ai
 → https://athlynx.net
 → https://athlynx.io
@@ -59,7 +59,7 @@ Contact: cdozier14@athlynx.ai
   if (success) {
     console.log("✅ Founder welcome notification sent successfully!");
   } else {
-    console.warn("⚠️  Notification service unavailable. Platform is still live at https://athlynxapp.vip");
+    console.warn("⚠️  Notification service unavailable. Platform is still live at https://athlynx.ai");
   }
 }
 

@@ -83,7 +83,7 @@ export const EMAIL_TEMPLATES = {
         </ul>
         
         <div style="text-align: center; margin: 30px 0;">
-          <a href="https://athlynxapp.vip/portal" style="background: linear-gradient(90deg, #00d4ff, #0066ff); color: white; padding: 15px 40px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
+          <a href="https://athlynx.ai/portal" style="background: linear-gradient(90deg, #00d4ff, #0066ff); color: white; padding: 15px 40px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
             Get Started Now
           </a>
         </div>
@@ -100,7 +100,7 @@ export const EMAIL_TEMPLATES = {
         </p>
       </div>
     `,
-    text: `Welcome to ATHLYNX, ${name}! Your journey to athlete success begins now. Visit https://athlynxapp.vip/portal to get started.`,
+    text: `Welcome to ATHLYNX, ${name}! Your journey to athlete success begins now. Visit https://athlynx.ai/portal to get started.`,
   }),
 
   // VIP code welcome
@@ -131,7 +131,7 @@ export const EMAIL_TEMPLATES = {
         </div>
         
         <div style="text-align: center; margin: 30px 0;">
-          <a href="https://athlynxapp.vip/portal" style="background: linear-gradient(90deg, #ffd700, #ff8c00); color: black; padding: 15px 40px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
+          <a href="https://athlynx.ai/portal" style="background: linear-gradient(90deg, #ffd700, #ff8c00); color: black; padding: 15px 40px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
             Access VIP Portal
           </a>
         </div>
@@ -147,7 +147,7 @@ export const EMAIL_TEMPLATES = {
         </p>
       </div>
     `,
-    text: `Welcome to the VIP Club, ${name}! Your code ${code} has been activated. Visit https://athlynxapp.vip/portal to access your exclusive benefits.`,
+    text: `Welcome to the VIP Club, ${name}! Your code ${code} has been activated. Visit https://athlynx.ai/portal to access your exclusive benefits.`,
   }),
 
   // Team notification
@@ -202,7 +202,7 @@ export const EMAIL_TEMPLATES = {
         </div>
         
         <div style="text-align: center; margin: 30px 0;">
-          <a href="https://athlynxapp.vip/command-center" style="background: linear-gradient(90deg, #00d4ff, #0066ff); color: white; padding: 15px 40px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
+          <a href="https://athlynx.ai/command-center" style="background: linear-gradient(90deg, #00d4ff, #0066ff); color: white; padding: 15px 40px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
             Access Command Center
           </a>
         </div>
@@ -218,7 +218,7 @@ export const EMAIL_TEMPLATES = {
         </p>
       </div>
     `,
-    text: `Welcome to the Team, ${name}! You've been invited as a ${role}. Your access code: ${accessCode}. Visit https://athlynxapp.vip/command-center to get started.`,
+    text: `Welcome to the Team, ${name}! You've been invited as a ${role}. Your access code: ${accessCode}. Visit https://athlynx.ai/command-center to get started.`,
   }),
 
   // Payment confirmation
@@ -242,7 +242,7 @@ export const EMAIL_TEMPLATES = {
         </p>
         
         <div style="text-align: center; margin: 30px 0;">
-          <a href="https://athlynxapp.vip/portal" style="background: linear-gradient(90deg, #22c55e, #16a34a); color: white; padding: 15px 40px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
+          <a href="https://athlynx.ai/portal" style="background: linear-gradient(90deg, #22c55e, #16a34a); color: white; padding: 15px 40px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
             Go to Dashboard
           </a>
         </div>

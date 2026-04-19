@@ -274,7 +274,7 @@ export default function Partners() {
           <h2 className="text-2xl font-black mb-2 text-white">Partner Across All Platforms</h2>
           <p className="text-blue-400 text-sm mb-8">Our growing domain portfolio</p>
           <div className="flex flex-wrap justify-center gap-3">
-            {["athlynx.ai", "nilportals.com", "nilportal.ai", "transferportal.ai", "aibotecosys.com", "athlynxapp.vip", "athlynx.io", "athlynx.net"].map((domain) => (
+            {["athlynx.ai", "nilportals.com", "nilportal.ai", "transferportal.ai", "aibotecosys.com", "athlynx.ai", "athlynx.io", "athlynx.net"].map((domain) => (
               <span key={domain} className="bg-gradient-to-r from-blue-600/30 to-cyan-600/30 border border-blue-500/40 text-cyan-300 px-4 py-2 rounded-lg font-bold text-sm">
                 {domain}
               </span>

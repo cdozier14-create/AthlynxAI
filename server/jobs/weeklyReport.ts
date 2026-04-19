@@ -71,11 +71,11 @@ export async function sendWeeklyReport(): Promise<void> {
     ${methodRows}
   </table>
   <div style="text-align:center;">
-    <a href="https://athlynxapp.vip/admin" style="display:inline-block;background:linear-gradient(135deg,#0066ff,#00c2ff);color:#fff;font-weight:900;font-size:14px;padding:12px 32px;border-radius:50px;text-decoration:none;">VIEW FULL DASHBOARD</a>
+    <a href="https://athlynx.ai/admin" style="display:inline-block;background:linear-gradient(135deg,#0066ff,#00c2ff);color:#fff;font-weight:900;font-size:14px;padding:12px 32px;border-radius:50px;text-decoration:none;">VIEW FULL DASHBOARD</a>
   </div>
 </td></tr>
 <tr><td style="background:#060d1f;padding:20px;text-align:center;border-top:1px solid #1e3a6e;">
-  <p style="color:#475569;font-size:12px;margin:0;">ATHLYNX &middot; A Dozier Holdings Group Company &middot; athlynxapp.vip</p>
+  <p style="color:#475569;font-size:12px;margin:0;">ATHLYNX &middot; A Dozier Holdings Group Company &middot; athlynx.ai</p>
   <p style="color:#334155;font-size:11px;margin:6px 0 0;">This report is sent every Sunday at 8:00 AM CST</p>
 </td></tr>
 </table>
@@ -84,7 +84,7 @@ export async function sendWeeklyReport(): Promise<void> {
 </body>
 </html>`;
 
-    const text = `ATHLYNX Weekly Growth Report — ${dateRange}\n\nNew signups this week: ${stats.thisWeek}\nLast week: ${stats.lastWeek}\nTotal users: ${stats.total}\n\nView dashboard: https://athlynxapp.vip/admin`;
+    const text = `ATHLYNX Weekly Growth Report — ${dateRange}\n\nNew signups this week: ${stats.thisWeek}\nLast week: ${stats.lastWeek}\nTotal users: ${stats.total}\n\nView dashboard: https://athlynx.ai/admin`;
 
     await Promise.all(
       OWNER_EMAILS.map(to =>
