@@ -433,20 +433,21 @@ export default function Home() {
       </div>
 
       {/* Hero video — ATHLYNX Multi-Sport Empire */}
-      <section className="relative bg-[#060e24] min-h-[320px] md:min-h-[480px]">
+      <section className="relative bg-[#060e24] min-h-[500px] md:min-h-[600px]">
         <video
           className="w-full h-full absolute inset-0 object-cover"
-          style={{ minHeight: '320px' }}
+          style={{ minHeight: '500px' }}
           autoPlay
           muted
           loop
           playsInline
-          onError={(e) => { (e.target as HTMLVideoElement).style.display = 'none'; }}
+          x-webkit-airplay="allow"
+          preload="auto"
         >
           <source src={CRAB_LOGO_VIDEO} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-t from-[#060e24] via-[#0d1b3e]/40 to-transparent pointer-events-none"></div>
-        <div className="relative z-10 min-h-[320px] md:min-h-[480px] flex flex-col items-center justify-between pt-6 pb-10 px-4 text-center">
+        <div className="relative z-10 min-h-[500px] md:min-h-[600px] flex flex-col items-center justify-center pt-6 pb-10 px-4 text-center">
 
           <div>
           <div className="inline-flex items-center gap-2 bg-yellow-500/20 border border-yellow-500 text-yellow-300 text-xs font-black px-4 py-1.5 rounded-full mb-4 tracking-widest">
